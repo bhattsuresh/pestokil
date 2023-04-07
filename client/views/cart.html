@@ -1,0 +1,190 @@
+{{include 'global/header'}}
+
+
+
+<div class="pt-5 pb-5">
+
+<div class="site-section">
+  <div class="container">
+    <div class="row mb-5">
+      <form class="col-md-12" method="post">
+        <div class="site-blocks-table cart-table-container">
+          <table class="table table-bordered">
+            <thead class="cart-table-th">
+              <tr>
+                <th class="product-thumbnail">Image</th>
+                <th class="product-name">Product</th>
+                <th class="product-price">Price</th>
+                <th class="product-quantity">Quantity</th>
+                <th class="product-tax">Tax(GST)</th>
+                <th class="product-total">Total</th>
+                <th class="product-remove">Remove</th>
+              </tr>
+            </thead>
+            
+         <tr><td colspan="6">
+
+            
+         </td>
+         
+        </table>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        
+            <div class="row">
+             
+              
+          
+              <div class="col-md-4 xs-mt-15">
+                <a href="{{app.url}}product" class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</a>
+              </div>
+            </div>
+
+
+
+            
+            <div class="row mt-3">
+              <div class="col-md-12">
+                
+                <h5 class="offer p-3"></h5>
+              </div>
+            </div>
+          
+            
+      </div>
+      <div class="col-md-4 pl-5 xs-mt-15">
+        <div class="row justify-content-end">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12 text-right border-bottom mb-5">
+                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <span class="text-black">Subtotal</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black cart-page-subtotal">0.00</strong>
+              </div>
+            </div>
+
+           
+
+
+            <div class="row mb-3 coupon-diplay-container hide">
+              <div class="col-md-8">
+                <span class="text-black cart-page-discount-label"> </span>
+                
+                <span class="btn btn-xs-r btn-outline-info" onclick="removeCoupon()">&times;</span>
+                
+              </div>
+              <div class="col-md-4 text-right">
+                <strong class="text-black cart-page-discount">0.00</strong>
+              </div>
+            </div>
+           
+    
+           <div class="row mb-3">
+              <div class="col-md-6">
+                <span class="text-black">GST Total</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black cart-gst-total">0</strong>
+              </div>
+            </div>
+
+              <div class="row mb-5">
+              <div class="col-md-6">
+                <span class="text-black tsc-label">Tcs of Any Goods</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black cart-extra-tax">0</strong>
+              </div>
+            </div>
+         
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <span class="text-black">Total</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black cart-page-total">0.00</strong>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-primary btn-lg py-3 btn-block" url="{{app.url}}" onclick="processCart(this)">Proceed To Checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center cart-loader">
+  <img src="{{app.url}}images/loading-cart.svg">
+  <br>
+  Loading...
+</div>
+
+
+</div>
+
+
+<script type="text/javascript">
+  var url = "{{app.url}}api/offer-enable-check";
+  app.get(url,(res)=>{
+    if(!res){
+        console.log("offer end")
+    }else{
+       var  free = app.offer(1);
+       if(free){
+          var post_url = "{{app.url}}api/set-offer";
+          var post_data = {};
+          post_data.offer = {offer:'Buy '+ free + ' GET '+ free +' free pillow along with this order'};
+          app.post(post_url,post_data,(post_res)=>{
+              console.log(post_res);
+          })
+       }
+    }
+  });
+
+
+
+function checkReferralCode(){
+	var url = "{{app.url}}api/apply-referral-code";
+	var code = $('#referral').val();
+	if(code == ""){
+		$('.referral-status').html('<span class="text-danger">Enter referral code first.</span>');
+	}else{
+		var data = {'referral':{'referral_code':code}};
+		app.post(url,data,(res)=>{
+			var cls = res.err ? 'text-danger':'text-success';
+			if(!res.err){
+				$('.referral-text').html('Referral Discount (2%)');
+				$('.referral-diplay-container').removeClass('hide');
+				$('.cart-page-referral-amt').attr('val',2);
+				app.calculate();
+				
+			}
+
+
+			$('.referral-status').html('<span class="'+cls+'">'+res.msg+'</span>');	
+			
+		})
+	}
+	
+}
+
+  
+</script>
+
+
+{{include 'global/footer'}}

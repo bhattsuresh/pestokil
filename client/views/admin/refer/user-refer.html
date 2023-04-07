@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Refer Code Detail </title>
+  <link rel="icon" href="{{app.url}}static/public/images/logo_morningowl_2-300x76.png" sizes="32x32" />
+  <link rel="icon" href="{{app.url}}static/public/images/logo_morningowl_2-300x76.png" sizes="192x192" />
+  <!-- Bootstrap -->
+  <link href="{{app.url}}static/private/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{app.url}}static/private/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{app.url}}static/private/vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{{app.url}}static/private/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link href="{{app.url}}static/private/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="{{app.url}}static/private/build/css/custom.min.css" rel="stylesheet">
+  <style>
+    .input {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- top navigation -->
+      {% include 'admin/layouts/header.html' %}
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <div class="menu_section">
+          <h3>General</h3>
+          <ul class="nav side-menu">
+            <li><a href="{{app.url}}admin/refer-list">
+                <i class="fa fa-arrow-left"></i> Go Back </a>
+            </li>
+            <li><a href="javascript:0"><i class="fa fa-shopping-cart"></i> Users <span
+                  class="fa fa-chevron-down"></span></a>
+              
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /sidebar menu -->
+      {% include 'admin/layouts/sidebar2.html' %}
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+
+
+          <div class="clearfix"></div>
+          <div class="row">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Referral Detail<small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                          class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                     <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>S.No</th>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Mobile</th>
+                          <th>Buy On</th> 
+                          <th>Referral Code</th>
+
+                        </tr>
+                      </thead>
+                      <tbody class="product-variation">
+                        
+                        {% for i,user in trackers %}
+                            
+                        <tr class="pro-tr-{{i}}">
+                          <td>{{i+1}}</td>
+                          <td>#{{ user.receiver._id }}</td>
+                          <td>{{user.receiver.first_name == "" ? "NA" : user.receiver.first_name}}</td>
+                          <td>{{user.receiver.email}}</td>
+                          <td>{{ user.receiver.phone == null ? '-' : user.receiver.phone }}</td>
+                          <td>{{user.created_at}}</td>
+                          <td>{{user.referral_code}}</td>
+                          
+                        </tr>
+
+                        {% endfor %}
+                      </tbody>
+                   
+                    </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+     
+
+
+        </div>
+      </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        {% include 'admin/layouts/footer.html' %}
+
+
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{{app.url}}static/private/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="{{app.url}}static/private/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="{{app.url}}static/private/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="{{app.url}}static/private/vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="{{app.url}}static/private/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="{{app.url}}static/private/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="{{app.url}}static/private/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="{{app.url}}static/private/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{app.url}}static/private/build/js/custom.min.js"></script>
+    <script>
+      var length = 0;
+
+      function editProduct(th) {
+        var i = $(th).attr('value');
+        $('.input-' + i).attr('type', 'text');
+        $('.pro-tr-' + i + ' span').hide();
+        $(th).html('<i class="fa fa-save"></i> Save')
+          .attr('onclick', 'saveProduct(this)')
+          .removeClass('btn-warning')
+          .addClass('btn-info');
+      }
+
+
+      function saveProduct(th) {
+        var i = $(th).attr('value');
+        var data = {
+          id: $('[name="product[' + i + ']"]').val(),
+          product: {
+            category: $('[name="category[' + i + ']"]').val(),
+            size: $('[name="size[' + i + ']"]').val(),
+            thickness: $('[name="thickness[' + i + ']"]').val(),
+            price: $('[name="price[' + i + ']"]').val(),
+          },
+
+        };
+        $.ajax({
+          type: 'POST',
+          url: $(th).attr('action'),
+          data: data,
+          success: function (res) {
+            if (res.success) {
+              $('.input-' + i).attr('type', 'hidden');
+
+              $(th).html('<i class="fa fa-pencil"></i> Edit')
+                .attr('onclick', 'editProduct(this)')
+                .removeClass('btn-info')
+                .addClass('btn-warning');
+
+              $('.input-' + i).each(function (j) {
+                $('.pro-tr-' + i + ' span').eq(j).text($(this).val());
+
+              });
+              $('.pro-tr-' + i + ' span').show();
+              app.showToast('Saved Successful', 'success');
+
+            } else {
+              app.showToast('This vriation already added', 'error');
+            }
+
+          }
+        });
+        return false;
+      }
+
+      function addProduct(th) {
+        var url = $(th).attr('action');
+        if (length == 0)
+          length = parseInt($(th).attr('length'));
+
+        formData = new FormData(th);
+        app.post(url, formData, (res) => {
+          if (res.id) {
+            app.showToast('added Successful', 'success');
+            var tr = '<tr class="pro-tr-' + length + ' " role="row">\
+              <td tabindex="0" class="sorting_1">'+ (length + 1) + ' <input type="hidden" name="product[' + length + ']" value="' + res.id + '"></td>\
+              <td> <span>'+ res.category + '</span> <input type="hidden" name="category[' + length + ']" class="input input-' + length + '" value="' + res.category + '"></td>\
+              <td><span>'+ res.size + ' </span> <input type="hidden" name="size[' + length + ']" class="input input-' + length + '" value="' + res.size + '"></td>\
+              <td> <span> '+ res.thickness + '</span> <input type="hidden" name="thickness[' + length + ']" class="input input-' + length + '" value="' + res.thickness + '"></td>\
+              <td><span>'+ res.price + ' </span> <input type="hidden" name="price[' + length + ']" class="input input-' + length + '" value="' + res.price + '"></td>\
+              <td> <a type="button" class="btn btn-warning btn-xs" value="'+ length + '" onclick="editProduct(this)" action="{{app.url}}admin/product-update"><i class="fa fa-pencil"></i> Edit</a></td>\
+            </tr>';
+            $('.product-variation').append(tr);
+            length++;
+          } else {
+            app.showToast('This vriation already added', 'error');
+          }
+        }, true);
+        return false;
+      }
+    </script>
+
+
+
+    <div id="OrderUpdateModal" class="modal fade-scale" role="dialog">
+      <div class="modal-dialog custom-size-dialog" style="width:85%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              <h5>Update Order</h5>
+
+            </div>
+
+
+
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-3">
+                <select class="form-control" name="order_status" required>
+                  <option value="" selected disabled>SELECT ORDER STATUS</option>
+                  <option value="Ordered">Ordered</option>
+                  <option value="Ordered">Ordered</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-success">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</body>
+
+</html>

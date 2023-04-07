@@ -1,0 +1,32 @@
+/*! CSS Used from: https://mymorningowl.com/mo/public/css/bootstrap.min.css */
+*,:after,:before{-webkit-box-sizing:border-box;box-sizing:border-box;}
+h1{margin-top:0;margin-bottom:0.5rem;}
+p{margin-top:0;margin-bottom:1rem;}
+h1{margin-bottom:0.5rem;font-family:inherit;font-weight:500;line-height:1.2;color:inherit;}
+h1{font-size:2.5rem;}
+.col-md-12{position:relative;width:100%;min-height:1px;padding-right:15px;padding-left:15px;}
+@media (min-width:768px){
+.col-md-12{-webkit-box-flex:0;-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%;}
+}
+.mt-2{margin-top:0.5rem!important;}
+.mb-2{margin-bottom:0.5rem!important;}
+.text-center{text-align:center!important;}
+@media (min-width:768px){
+.text-md-left{text-align:left!important;}
+}
+@media print{
+*,:after,:before{text-shadow:none!important;-webkit-box-shadow:none!important;box-shadow:none!important;}
+p{orphans:3;widows:3;}
+}
+/*! CSS Used from: https://mymorningowl.com/mo/public/css/style.min.css */
+::-moz-selection{background:#000;color:#fff;}
+::selection{background:#000;color:#fff;}
+.site-blocks-cover h1{font-size:30px;font-weight:900;color:#fff;}
+@media (min-width:768px){
+.site-blocks-cover h1{font-size:50px;}
+}
+.site-blocks-cover p{color:#333;font-size:20px;line-height:35px;}
+.site-blocks-cover .intro-text{font-size:16px;line-height:1.5;}
+/*! CSS Used from: https://mymorningowl.com/mo/public/css/app.min.css */
+.pt-17{padding-top:170px;}
+.pt-20{padding-top:200px;}

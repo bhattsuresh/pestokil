@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Order Shipping info</title>
+</head>
+
+
+{{include 'global/header'}}
+
+				
+	 <div class="container">
+	 	 <div class="invoice-print" id="PrintSection">
+               <center> Shipping Info</center>
+                          <title>Cosmos Tax Invoice {{order.shipping.id}}</title>
+                            <div class="row invoice-info print">
+
+                        <table border="1" class="ship-tbl" style="width: 100%">
+                          <tr>
+                            <td rowspan="6"></td>
+                            <td><strong>Customer Name</strong></td>
+                            <td>{{shipping.user.firstname}} {{shipping.user.lastname}}</td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Shipping Address</strong></td>
+                            <td>
+                                 <br>{{shipping.user.address.ship_address}}
+                                          <br>{{shipping.user.address.ship_address_more}}
+                                          <br>{{shipping.user.address.ship_state_country}}, PIN - {{shipping.user.address.ship_zip}}
+                            </td>
+                            <td><strong>Order Number:</strong> #{{shipping.order.id}}</td>
+                          </tr>
+
+                              <tr>
+                            <td> <br></td>
+                            <td>
+                            
+                            </td>
+                            <td rowspan="3">
+                                      <b>Dispatch From:</b> {{shipping.dispatchFrom}}
+                                <br>
+                                <b>Vehicle Number:</b> {{shipping.vehicleNumber}}
+                                <br>
+                                
+                                <b>Driver Contact:</b> {{shipping.shipperContact}}
+                                <br>
+                                <b>Shiping Detail:</b> {{shipping.detail}}
+                             
+                            
+                            </td>
+                          </tr>
+
+
+                          <tr>
+                            <td><strong>Contact Details</strong></td>
+                            <td>
+                                          Phone: {{shipping.user.address.ship_phone}}
+                                          <br>Email: {{shipping.user.address.ship_email}}
+                            </td>
+                            
+                          </tr>
+
+                          <tr>
+                            <td><strong>Route number</strong></td>
+                            
+                            <td>
+                            {{shipping.order.routeNumber}}
+                            </td>
+                          </tr>
+
+                            <tr>
+                            <td> <br></td>
+                            <td>
+                            
+                            </td>
+                            <td>
+                            
+                            </td>
+                          </tr>
+
+
+
+
+
+                              <tr>
+                                <th>S no</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th style="width:40%">Remarks</th>
+                             
+                              </tr>
+                           
+
+                              {{#each shippingItems}}
+                              <tr>
+                                <td>{{inc @index}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{qty}}</td>
+                                <td>
+                                  
+                                </td>
+                               
+                              </tr>
+                              
+                              {{add 'total' (math rate qty '*') }}
+                            {{/each}}
+
+                               
+
+                        </table>
+
+                        <!-- /.col -->
+                    
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <style type="text/css">
+      .invoice-print *{
+        color:#444!important;
+      }
+      .invoice-tbl{
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .invoice-tbl tr th,.invoice-tbl tr td{
+         padding: 5px 5px;
+      }
+      .print-heading{
+        font-weight: bold;
+        margin: 0;
+      }
+      .line{
+        border-color: #444!important;
+        margin:5px 0 ;
+        border:1px solid;
+      }
+     
+      .border-right{
+        border-right: 2px solid #444; 
+      }
+      .inner-tbl .line{
+        margin-top: 2px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .inner-tbl tr th,.inner-tbl tr td{
+         padding: 2px 2px;
+      }
+
+      .item-container {
+        border:1px solid #444;
+        min-height: 450px;
+      }
+     .item-tbl tr th{
+        border:1px solid #444;
+        border-top: none;
+        text-align: center;
+      }
+       .item-tbl tr th:first-child{
+        border-left: none;
+        width: 30px;
+      } .item-tbl tr th:last-child{
+        border-right:  none;
+      }
+
+      .item-border-right td{
+        border-right: 1px solid #444;
+      }
+      .item-tbl{
+         border-collapse: collapse;
+      }
+      .inner-tbl{
+        border-collapse: collapse;
+      }
+      table{
+            border-collapse: collapse;
+          }
+        @media print{
+          *{
+            /*line-height: 11px;
+            font-size:  11px;*/
+          }
+
+          .no-print{
+          	display: none;
+          }
+
+          table{
+            border-collapse: collapse;
+          }
+        }
+    </style>
+
+    <script type="text/javascript">
+      
+
+
+function convertNumberToWords(s) {
+  s = parseFloat(s);
+
+  var th = ['', 'thousand', 'million', 'billion', 'trillion'];
+
+var dg = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+var tn = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+var tw = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+    s = s.toString();
+    s = s.replace(/[\, ]/g, '');
+    if (s != parseFloat(s)) return 'not a number';
+    var x = s.indexOf('.');
+    if (x == -1) x = s.length;
+    if (x > 15) return '-';
+    var n = s.split('');
+    var str = '';
+    var sk = 0;
+    for (var i = 0; i < x; i++) {
+        if ((x - i) % 3 == 2) {
+            if (n[i] == '1') {
+                str += tn[Number(n[i + 1])] + ' ';
+                i++;
+                sk = 1;
+            } else if (n[i] != 0) {
+                str += tw[n[i] - 2] + ' ';
+                sk = 1;
+            }
+        } else if (n[i] != 0) {
+            str += dg[n[i]] + ' ';
+            if ((x - i) % 3 == 0) str += 'hundred ';
+            sk = 1;
+        }
+        if ((x - i) % 3 == 1) {
+            if (sk) str += th[(x - i - 1) / 3] + ' ';
+            sk = 0;
+        }
+    }
+    if (x != s.length) {
+        var y = s.length;
+        str += 'and ';
+        for (var i = x + 1; i < y; i++) str += dg[n[i]] + ' ';
+    }
+    var a = str.replace(/\s+/g, ' ');
+    return a.charAt(0).toUpperCase() + a.slice(1);
+}
+
+    </script>
+</div>
+
+
+<div class="row no-print " style="text-align: center;">
+            <div class="col-md-12 text-center">
+              <br>
+              <button class="btn btn-default" onclick="window.print()"><i class="icon-print"></i> Print</button> 
+              &nbsp; &nbsp;
+              <button class="btn no-print" onclick="history.go(-1)">Back</button>
+            </div>
+          </div>
+
+	 </div>	
+<script type="text/javascript">
+        function invoicePrint(){
+            var prtContent = document.getElementById("PrintSection");
+            var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=800,toolbar=0,scrollbars=0,status=0');
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            //WinPrint.close();
+        }
+
+     
+
+
+
+        //document.getElementById("total-in-words").innerHTML=convertNumberToWords('{{total}}')+ ' Only';
+
+
+
+      </script>
+
+<div class="no-print">
+{{include 'global/footer'}}
+</div>

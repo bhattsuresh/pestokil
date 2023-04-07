@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Catalog > Category</title>
+ <link rel="icon" href="{{app.url}}/images/favicon.png" sizes="32x32" />
+    <link rel="icon" href="{{app.url}}/images/favicon.png" sizes="192x192" />
+  <!-- Bootstrap -->
+  <link href="{{app.url}}vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{app.url}}vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{app.url}}vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{{app.url}}vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link href="{{app.url}}vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="{{app.url}}build/css/custom.min.css" rel="stylesheet">
+  <style>
+    .input {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      
+
+
+      <!-- top navigation -->
+       {{include 'admin/global/header' }}
+       {{include 'admin/global/sidebar'}}
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+
+            </div>
+
+            <!-- <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>-->
+          </div>
+
+          <div class="clearfix"></div>
+
+           <div class="row">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Add<small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                          class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  
+                  <form id="addForm" method="post" action="/admin/catalog/category" >
+                    <div class=" row">
+                      <div class="col-xs-12">
+
+                        <div class="form-group row">
+                          
+                           <div class="col-sm-4">
+                            <input type="text"  class="form-control" placeholder="Category Name" name="name" value="" required>
+                          </div>
+
+
+                      
+                                                
+                          <div class="col-sm-1">
+                            
+                            <button type="submit" class="btn btn-green" id="inputSubmit" value="Create">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="res hide" style=" background:#ffffffbf; max-height:400px; overflow-y:auto">
+                          <table id="datatable-buttons" class="table table-striped table-bordered">
+                            <tbody id="res">
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>List<small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                          class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  
+                  
+
+
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>S.No</th>
+                          <th>ID</th>
+                          <th>Category</th>
+                          <th>Date</th> 
+                          <th>Action</th> 
+                        </tr>
+                      </thead>
+                      <tbody class="product-variation">
+                        
+                        {{#each data}}
+                            
+                        <tr class="pro-tr-{{i}}">
+                          <td>{{inc @index}}</td>
+                          <td>#{{id}}</td>
+                          <td><span class="cat-{{id}}">{{name}}</span> <input type="hidden" class="cat-input-{{id}}" value="{{name}}"></td>
+                          <td>{{date}}</td>
+                          <td><a type="button" data-id="{{id}}" class="btn btn-warning btn-xs"
+                            onclick="editCetegory(this);"><i class="fa fa-pencil"></i>  Edit</a></td>
+                        </tr>
+
+                        {{/each}}
+                      </tbody>
+                   
+                    </table>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      {{include 'admin/global/footer'}}
+
+
+      <!-- /footer content -->
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="{{app.url}}vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="{{app.url}}vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="{{app.url}}vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="{{app.url}}vendors/nprogress/nprogress.js"></script>
+  <!-- iCheck -->
+  <script src="{{app.url}}vendors/iCheck/icheck.min.js"></script>
+  <!-- Datatables -->
+  <script src="{{app.url}}vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="{{app.url}}vendors/jszip/dist/jszip.min.js"></script>
+  <script src="{{app.url}}vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="{{app.url}}vendors/pdfmake/build/vfs_fonts.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="{{app.url}}build/js/custom.min.js"></script>
+  <script>
+    var length = 0;
+
+    function editCetegory(t) {
+      var id = $(t).attr('data-id');
+      $('.cat-input-' + id).attr('type', 'text');
+      $('.cat-' + id).hide();
+      $(t).html('<i class="fa fa-save"></i> Save')
+      .attr('onclick','updateCetegory(this)')
+      .removeClass('btn-warning')
+      .addClass('btn-info');
+    }
+
+
+    function updateCetegory(t) {
+      var id = $(t).attr('data-id');
+      var name = $('.cat-input-' + id).val();
+    
+
+      app.post('/api/update-category',{id,name},
+        res=> {
+          if(!res.err){
+            $('.cat-input-' + id).attr('type', 'hidden');
+            $('.cat-' + id).fadeIn(500).text(name);
+           
+            $(t).html('<i class="fa fa-pencil"></i> Edit')
+            .attr('onclick','editCetegory(this)')
+            .removeClass('btn-info')
+            .addClass('btn-warning');
+
+            //app.showToast('Saved Successful','success');
+           
+          }else{
+            app.showToast('Sorry something went wrong','error');
+          }
+
+        })
+      
+      
+    }
+
+    
+
+  </script>
+
+</body>
+
+</html>

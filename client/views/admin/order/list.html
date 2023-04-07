@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Orders</title>
+  <link rel="icon" href="{{app.url}}static/public/images/logo_morningowl_2-300x76.png" sizes="32x32" />
+  <link rel="icon" href="{{app.url}}static/public/images/logo_morningowl_2-300x76.png" sizes="192x192" />
+  <!-- Bootstrap -->
+  <link href="{{app.url}}vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{app.url}}vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{app.url}}vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{{app.url}}vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link href="{{app.url}}vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="{{app.url}}build/css/custom.min.css" rel="stylesheet">
+  <style>
+    .input {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      
+
+
+      <!-- top navigation -->
+      {{ include 'admin/global/header' }}
+      {{ include 'admin/global/sidebar' }}
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title"> 
+
+                  <h2>Showing all orders between dated {{from_date}} - {{to_date}}<small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><form action="?" method="GET" class=" search-form " >
+                      From:<input  title="yyyy-mm-dd or yyyy-mm or yyyy" minlength="4" value="{{from_date}}"  name="from_date" style="padding: 4px 6px; border:1px solid #aaa" type="date"   required>     To: <input  title="yyyy-mm-dd or yyyy-mm or yyyy" minlength="4" value="{{to_date}}" type="date"  name="to_date" style="padding: 4px 6px; border:1px solid #aaa"  required>
+                      
+                      <input type="hidden" name="status" value="{{status}}">
+    <input type="submit" class="btn btn-info btn-sm" value="Find"/>
+  </form>
+                    </li> 
+
+                    
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <a href="?from_date={{from_date}}&to_date={{to_date}}&status=All" class="btn All">All Orders</a> 
+                    <a href="?from_date={{from_date}}&to_date={{to_date}}&status=Hold" class="btn Hold">On Hold</a> 
+                    <a href="?from_date={{from_date}}&to_date={{to_date}}&status=Accepted" class="btn Accepted"> Pending Orders </a> 
+                    <a href="?from_date={{from_date}}&to_date={{to_date}}&status=Shipped" class="btn Shipped">Shipped Orders </a> 
+                    <hr>
+
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr class="small">
+                          <th>S.No</th>
+                          <th>Order ID</th>
+                          <th>User ID</th>
+                          <th>Sub total</th>
+                          <th>Paid total</th>
+                          <th>Payment Status</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                          
+
+                        </tr>
+                      </thead>
+                      <tbody >
+                          {{#each orders}}
+
+                          <tr class="pro-tr-{{@index}}" >
+                            <td>{{inc @index}}</td>
+                            <td><a href="order/{{id}}">#{{id}}</a></td>
+                            <td>#{{userId}} <small>{{firstname}}</small></td>
+                           
+                            
+                            
+                            <td>{{subTotal}} </td>
+                            
+                            <td>{{total}}</td>
+                            <td>{{paymentStatus}} <small> ({{paymentMethod}})</small></td>
+                              <td>{{date}}</td>
+                         
+                        <td class="order-status">     
+                          {{orderStatus}}
+                        </td>
+
+                          <td>
+                            
+                             
+                            <a href="/admin/order/{{id}}" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> </a>
+                            
+                            <a href="/admin/order/delete/{{id}}" onclick="return confirm('Are You sure to delete this order')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                          
+                          </td>
+                        </tr>
+
+                        {{/each}}
+                       
+                      </tbody>
+                    </table>
+                  
+                   
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      {{ include 'admin/global/footer' }}
+
+
+      <!-- /footer content -->
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="{{app.url}}vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="{{app.url}}vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="{{app.url}}vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="{{app.url}}vendors/nprogress/nprogress.js"></script>
+  <!-- iCheck -->
+  <script src="{{app.url}}vendors/iCheck/icheck.min.js"></script>
+  <!-- Datatables -->
+  <script src="{{app.url}}vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="{{app.url}}vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="{{app.url}}vendors/jszip/dist/jszip.min.js"></script>
+  <script src="{{app.url}}vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="{{app.url}}vendors/pdfmake/build/vfs_fonts.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="{{app.url}}build/js/custom.min.js"></script>
+
+  <script type="text/javascript">
+    var status = "{{status}}";
+
+     function orderUpdateStatus(t){
+        var order = {};
+        order.status = $(t).val();
+        order.orderId = $(t).attr('data-id');
+        var index = $(t).attr('data-index');
+        jQuery('.order-status').eq(index).text(order.status);
+
+        app.post('/api/order-update-status',order,res=>{
+            if(!res.err && status != 'All')
+              jQuery('.pro-tr-'+index).remove();
+
+            app.showToast(res.data,res.err)
+
+        });
+      }
+     
+      jQuery('.'+status).addClass('btn-info');
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title> {{app.name}}</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+
+
+{{ include 'global/header' }}
+
+
+<style type="text/css">
+  @media(max-width: 768px){
+    .progtrckr li{
+      display: block!important;
+      width: 80% !important;
+    }
+
+    .xs-space{
+      margin-top: 15px;
+
+    }
+  }
+  
+</style>
+
+{{ set 'user' session.user }}
+{{set 'address' order.orderAddress}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 p-0 user-dash-col-1">
+     <nav class="user-dash-nav">
+      <ul>
+
+            <li><a class="btn user-menu btn-block" value="dashboard-tab" href="{{app.url}}dashboard"><i
+                              class="icon-arrow-left"></i> Go Back </a></li>
+            <li>
+                  <a class="btn user-menu btn-block" value="orders-tab"><i
+                              class="icon icon-shopping_cart"></i> Orders Complaints </a>
+
+            </li>
+      </ul>
+</nav>
+    </div>
+    <div class="col-md-10 p-0">
+
+      <div class="user-dash-section">
+        <div class="dashboard-header text-right bg-white">
+          <span style="float:left; font-size: 1.2em; border-bottom: 1px solid #17a2b8;"
+            class="text-info d-none d-lg-block"> Username:
+            <b class="text-primary">{{user.firstname}}</b>!</span>
+          <button class="btn btn-outline-primary" onclick="location.reload()"> <i class="icon icon-repeat"></i> Reload
+          </button>
+          &nbsp; <a class="btn btn-outline-danger" href="{{app.url}}logout"> <i class="icon icon-sign-out"></i> Logout
+          </a>
+        </div>
+
+
+
+
+
+
+        <div class="site-section block-3 site-blocks-2 bg-light orders-tab">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-7 site-section-heading text-center pt-4">
+                <h2>My Complaints  </h2>
+
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+                   
+                  {{#each complaints}}
+                   <br>
+                    <h3>Complaint # {{inc @index}}</h3>
+                   <br>
+                  <table  class="table">
+                    
+                    <tr>
+                      <th>Ticket</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>On Order</th>
+                    </tr>
+                    <tr>
+                      <td>{{ticket}} </td>
+                      <td>{{#if (eq status 'Pending')}} <span class="text-danger">{{status}}</span> {{else}} <span class="text-success">{{status}}</span> {{/if}} </td> 
+                      <td>{{date}} </td> 
+                      <td>{{orderId}} </td> 
+                      
+ 
+                    </tr>
+                      
+                      <tr>
+                   
+                      <th>Subject</th> 
+                      <td colspan="3">{{subject}} </td> 
+ 
+                    </tr> 
+
+                  </tr>
+                      
+                      <tr>
+                   
+                      <th>Complaint</th> 
+                      <td colspan="3">{{complaint}} </td> 
+ 
+                    </tr>
+                      
+                     </tr>
+                      
+                      <tr>
+                   
+                      <th>Reply Remarks from Cosmos</th> 
+                      <td colspan="3">{{response}}  </td> 
+ 
+                    </tr>
+
+                  </table>
+
+
+                  {{/each}}
+
+                   
+               
+              </div>
+            </div>
+			
+			
+	  
+
+
+
+
+        
+     
+          
+
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div id="orderReturnModal" class="modal fade-scale" role="dialog">
+   <div class="row">
+               <div class="col-md-8 offset-md-2">
+   <div class="modal-dialog">
+
+   
+      <div class="modal-content">
+         <div class="modal-header">
+            <div class="modal-title">
+               <h5 class="text-center">Fill the form with reason of return and product images</h5>
+            </div>
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+         </div>
+         <div class="modal-body">
+           
+             <form  id="order_return_form" method="post" class="formName" onsubmit="submitFun(this)" enctype="multipart/form-data">
+           
+                <div class="row">
+                  <div class="col-md-7">
+                    <input type="hidden" id="return_order_id" name="order_return[order_id]" >
+                     <label>Enter reason for return<i class="text-danger small icon-asterisk"></i></label>
+                        <div class="form-group">
+                           <textarea  name="order_return[user_notes]" class="form-control pt-2" rows="7" cols="200"  required="" value=""></textarea>
+                           
+                        </div>
+                 
+                  
+                    
+                        </div>
+                        <div class="col-md-5">
+                         
+                           Add Images of Product<i class="text-danger small icon-asterisk"></i>
+                             <div class="input-group" style="padding-top: 10px;">
+                               <div class="input-group-prepend">
+                                <img id="preview1" src="#"  class="hide" style="height: 38px; width: 50px;">
+                              </div>
+                              
+                              <div class="custom-file">
+                                <input type="file" img="preview1" class="custom-file-input" accept="image/*" id="inputGroupFile01"
+                                  aria-describedby="inputGroupFileAddon01" name="order_images_one" required="">
+                                  <label class="custom-file-label" for="inputGroupFile02"></label>
+                                 
+                              </div>
+                            </div>
+
+                             <div class="input-group" style="padding-top: 10px;">
+                              <div class="input-group-prepend">
+                                <img id="preview2" src="#"  class="hide" style="height: 38px; width: 50px;">
+                              </div>
+                              <div class="custom-file">
+                                <input type="file" img="preview2"  class="custom-file-input" accept="image/*" id="inputGroupFile02"
+                                  aria-describedby="inputGroupFileAddon02" name="order_images_two" required="">
+                                <label class="custom-file-label" for="inputGroupFile02"></label>
+                              </div>
+                            </div>
+
+                            <div class="input-group" style="padding-top: 10px;">
+                              <div class="input-group-prepend">
+                                 <img id="preview3" src="#"  class="hide" style="height: 38px; width: 50px;">
+                              </div>
+                              <div class="custom-file">
+                                <input type="file" img="preview3"  class="custom-file-input" accept="image/*" id="inputGroupFile02"
+                                  aria-describedby="inputGroupFileAddon02" name="order_images_three" required="">
+                                <label class="custom-file-label" for="inputGroupFile02"></label>
+                              </div>
+                            </div>
+
+                            <div class="input-group" style="padding-top: 10px;">
+                              <div class="input-group-prepend">
+                                 <img id="preview4" src="#"  class="hide" style="height: 38px; width: 50px;">
+                              </div>
+                              <div class="custom-file">
+                                <input type="file" img="preview4"  class="custom-file-input" accept="image/*" id="inputGroupFile02"
+                                  aria-describedby="inputGroupFileAddon02" name="order_images_four" required="">
+                                <label class="custom-file-label" for="inputGroupFile02"></label>
+                              </div>
+                            </div>
+
+
+
+                          
+
+
+
+                             
+                            </div>
+                          </div>
+                   
+
+              <div class="text-right mt-2"> 
+                <br>
+                <button type="button" id="order_return_btn"
+                              class="btn btn-primary mt-2">
+                                Send Request
+                          </button>
+
+                <button type="button" data-dismiss="modal" class="btn btn-default  mt-2">
+                               Colse
+                          </button>
+               </div>
+
+ </form>
+                  </div>
+                
+              
+            
+         </div>
+      </div>
+
+   </div>
+</div>
+</div>
+
+
+
+    <div id="OrderComplaintModal" class="modal fade-scale" role="dialog">
+      <div class="modal-dialog custom-size-dialog" style="width:50%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              <h5>Raise Order Complaint</h5>
+
+            </div>
+
+
+
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12 complaint-res">
+                 <label>Order Number </label>
+                <input type="text" class="form-control" value="#{{order.id}}" readonly="">
+                <input type="hidden" class="form-control complaint-order-id"  value="{{order.id}}">
+                <br>
+                 <label>Subject </label>
+                <input type="text"  class="form-control complaint-subject" required="" placeholder="Enter Suject of Complaint">
+                   <br>
+                <label>Complaint </label>
+                <textarea class="form-control complaint-message" rows="6" placeholder="Enter Your Message" required=""></textarea>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-info" onclick="sendOrderComplaint(this)">Submit Complaint</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+<script type="text/javascript">
+   function sendOrderComplaint(t){
+     var subject = $('.complaint-subject').val();
+     var complaint = $('.complaint-message').val();
+     var orderId = $('.complaint-order-id').val();
+     if(orderId.length && complaint.length && subject.length){
+     app.post('/api/send-order-complaint',{orderId,subject,complaint},res=>{
+      if(res.err){
+        app.showToast('Error to send your complaint. <br> Please Email at {{app.email}}');
+      }else{
+        $('.complaint-res').html("<p class='text-center'>Thank-You! <br> Your complaint has been registered successfully.<br><br> Your complaint ticket number: "+res.ticket+" </p>");
+        $(t).replaceWith('<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>');
+      }
+     });
+   }else{
+    app.showToast('Please Fill the form first!');
+    $('.complaint-subject').focus();
+   }
+   }
+
+  
+ 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  setTimeout(() => setUserCurrentTab(), 300);
+</script>
+
+
+{{ include 'global/footer' }}

@@ -1,0 +1,153 @@
+
+
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+          <li><a href="javascript:0"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+               {{#if (inArray 'dashboard' session.admin.data.rights) }}
+              <li><a href="{{app.url}}admin/dashboard">Dashboard</a></li>
+              {{/if}}
+
+            </ul>
+          </li>
+
+       
+
+         
+
+          <li><a href="javascript:0"><i class="fa fa-list"></i> Catalog <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+               {{#if (inArray 'category' session.admin.data.rights) }}
+                <li><a href="{{app.url}}admin/catalog/category">Category</a></li>
+              {{/if}}
+              {{#if (inArray 'product' session.admin.data.rights) }}
+              <li><a href="{{app.url}}admin/catalog/product">Product</a></li>
+              {{/if}}
+              <!--li><a>Product<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li><a href="{{app.url}}admin/catalog/product">Add & View</a></li>
+                            <li><a href="{{app.url}}admin/catalog/variation">Variation</a></li>
+                            <li><a href="{{app.url}}admin/product-offer">Product offer</a></li>
+                          </ul>
+                </li-->
+            </ul>
+
+          </li>
+
+
+
+          <li><a href="javascript:0"><i class="fa fa-shopping-bag"></i> Orders <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              {{#if (inArray 'all_orders' session.admin.data.rights) }}
+              <li><a href="{{app.url}}admin/orders">All Orders</a></li>
+              {{/if}}
+
+           
+
+              {{#if (inArray 'pending_order' session.admin.data.rights) }}
+              <li><a href="{{app.url}}admin/report/pending/orders">Pending Order</a></li>
+              {{/if}}
+              
+            </ul>
+          </li>
+
+            <li><a href="javascript:0"><i class="fa fa-truck"></i> Shipping & Invoices <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+               {{#if (inArray 'add_shipping' session.admin.data.rights) }}
+                <li><a href="{{app.url}}admin/order-shipping">Add Shipping </a></li>
+              {{/if}}
+
+              {{#if (inArray 'invoice' session.admin.data.rights) }}
+              <li><a href="{{app.url}}admin/order-shipping-list"> Order's Invoice</a></li>
+              {{/if}}
+             
+            </ul>
+          </li>
+
+          <li><a href="javascript:0"><i class="fa fa-user"></i> Users <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+               {{#if (inArray 'customer' session.admin.data.rights) }}
+              <li>
+                <a href="{{app.url}}admin/customers">Customers</a>
+              </li>
+                {{/if}}
+               {{#if (inArray 'admin' session.admin.data.rights) }}
+              <li>
+                <a href="{{app.url}}admin/admins">Admins</a>
+              </li>
+                {{/if}}
+            </ul>
+          </li> 
+
+          <li><a href="javascript:0"><i class="fa fa-file"></i> Static <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+               {{#if (inArray 't_and_c' session.admin.data.rights) }}
+              <li>
+                <a href="{{app.url}}admin/term-and-condition">Term and Condition</a>
+              </li>
+              {{/if}}
+            </ul>
+          </li>
+
+          <li><a href="javascript:0"><i class="fa fa-file"></i> Reports <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+
+               {{#if (inArray 'orderReport' session.admin.data.rights) }}
+                  <li><a href="{{app.url}}admin/order-report">All Order Report</a></li>
+                {{/if}}
+
+
+               {{#if (inArray 'pendingOrder' session.admin.data.rights) }}
+                  <li><a href="{{app.url}}admin/order-pending-report">Pending Order Report</a></li>
+                {{/if}}
+
+
+               {{#if (inArray 'accountLedger' session.admin.data.rights) }}
+              <li>
+                <a href="{{app.url}}admin/account-ledger">Account Ledger</a>
+              </li>
+              {{/if}}
+
+                 {{#if (inArray 'complaints' session.admin.data.rights) }}
+                  <li><a href="{{app.url}}admin/complaints">Complaints</a></li>
+                {{/if}}
+
+                 {{#if (inArray 'sales' session.admin.data.rights) }}
+                  <li><a href="{{app.url}}admin/sales">Sales</a></li>
+                {{/if}}
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+
+
+    </div>
+    <!-- /sidebar menu -->
+
+
+
+
+
+    
+    <!-- /menu footer buttons -->
+    <div class="sidebar-footer hidden-small">
+        <a data-toggle="tooltip" data-placement="top" title="Dashboard" href="{{app.url}}admin/dashboard">
+          <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="menu_toggle.click()">
+          <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Trash" href="{{app.url}}admin/trash">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout" >
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </a>
+    </div>
+    <!-- /menu footer buttons -->
+  </div>
+</div>

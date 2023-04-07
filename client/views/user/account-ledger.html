@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title> {{app.name}}</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+
+
+{{ include 'global/header' }}
+
+
+<style type="text/css">
+  @media(max-width: 768px){
+    .progtrckr li{
+      display: block!important;
+      width: 80% !important;
+    }
+
+    .xs-space{
+      margin-top: 15px;
+
+    }
+  }
+  
+</style>
+
+{{ set 'user' session.user }}
+{{set 'address' order.orderAddress}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 p-0 user-dash-col-1">
+          <nav class="user-dash-nav">
+      <ul>
+
+            <li><a class="btn user-menu btn-block" value="dashboard-tab" href="{{app.url}}dashboard"><i
+                              class="icon-arrow-left"></i> Go Back </a></li>
+            <li>
+                  <a class="btn user-menu btn-block active" value="inv-tab"><i
+                              class="icon icon-money"></i> Account Ledger </a>
+
+            </li>
+      </ul>
+</nav>
+    </div>
+    <div class="col-md-10 p-0">
+
+      <div class="user-dash-section">
+        <div class="dashboard-header text-right bg-white">
+          <span style="float:left; font-size: 1.2em; border-bottom: 1px solid #17a2b8;"
+            class="text-info d-none d-lg-block"> Username:
+            <b class="text-primary">{{user.firstname}}</b>!</span>
+          <button class="btn btn-outline-primary" onclick="location.reload()"> <i class="icon icon-repeat"></i> Reload
+          </button>
+          &nbsp; <a class="btn btn-outline-danger" href="{{app.url}}logout"> <i class="icon icon-sign-out"></i> Logout
+          </a>
+        </div>
+
+
+
+
+
+
+        <div class="site-section block-3 site-blocks-2  orders-tab">
+          <div class="container table-responsive">
+            
+               
+                    
+                  {{#each shipping}}
+                    <h3>ORDER #{{id}}</h3>
+                      {{set 'tAmount' 0}}
+                    <table id="datatable-buttons" class="table bg-light table-bordered">
+                      <thead>
+                        <tr class="small">
+                         
+                          <th>DATE</th>
+                          <th>Payment Credit</th>
+                          <th>Invoice Debit</th>
+                          <th>Reference No</th>
+                          <th>Balance</th>
+                          
+
+                        </tr>
+                      </thead>
+                      <tbody >
+                          <tr class="pro-tr-{{@index}}" >
+                          
+                             <td>{{date}}</td>
+                            <td>{{total}}</td>
+                           
+                         
+                        
+
+                          <td>
+                            {{#each shippings}}
+                           {{amount}} <hr>
+                            {{/each}}
+                            
+                          </td>
+
+
+                          <td>
+                            {{#each shippings}}
+                           #{{id}} <hr>
+                            {{/each}}
+                            
+                          </td>
+                          <td>
+                               {{set 'a' total }}
+                             
+                            {{#each shippings}}
+                                {{add 'tAmount' amount}}
+                                {{math @root.a @root.tAmount '-'}}
+                               <hr>
+                            {{/each}}
+                            
+                          </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                        {{/each}}
+                       
+                      
+            
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  setTimeout(() => setUserCurrentTab(), 300);
+</script>
+
+
+{{ include 'global/footer' }}

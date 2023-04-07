@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Customer Detail</title>
+   <link rel="icon" href="{{app.url}}/images/favicon.png" sizes="32x32" />
+    <link rel="icon" href="{{app.url}}/images/favicon.png" sizes="192x192" />
+  <!-- Bootstrap -->
+  <link href="{{app.url}}vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{app.url}}vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{app.url}}vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{{app.url}}vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link href="{{app.url}}vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="{{app.url}}build/css/custom.min.css" rel="stylesheet">
+  <style>
+    .input {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- top navigation -->
+      {{include 'admin/global/header'}}
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <div class="menu_section">
+          <h3>General</h3>
+          <ul class="nav side-menu">
+            <li><a href="{{app.url}}admin/customers">
+                <i class="fa fa-arrow-left"></i> Go Back </a>
+            </li>
+            <li><a href="javascript:0"><i class="fa fa-shopping-cart"></i> Users <span
+                  class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{app.url}}admin/customer/{{user.id}}">User Detail</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /sidebar menu -->
+      {{include 'admin/global/sidebar2'}}
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+
+
+          <div class="clearfix"></div>
+          <div class="row">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Detail<small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                          class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                 User Credit  &nbsp; &nbsp; <label class="text-success"><input type="radio" onclick="return setCredit(this)" {{#if (eq user.credit 1)}} checked {{/if}} name="credit" value="1"> ON</label>
+                  &nbsp;  &nbsp;
+                  <label class="text-danger"><input type="radio" onclick="return setCredit(this)" {{#if (eq user.credit 0)}} checked {{/if}}  name="credit" value="0"> OFF</label>
+
+                  
+                  <hr>
+                  Tcs of Any Goods  &nbsp; &nbsp; <label class="text-success"><input type="radio" onclick="return setTsc(this)" {{#if (eq user.tsc 1)}} checked {{/if}} name="tsc" value="1"> ON</label>
+                  &nbsp;  &nbsp;
+                  <label class="text-danger"><input type="radio" onclick="return setTsc(this)" {{#if (eq user.tsc 0)}} checked {{/if}}  name="tsc" value="0"> OFF</label>
+
+                  <hr>
+
+                  <div class="pull-right">
+                    <input type="hidden" name="userId" value="{{user.id}}">
+                        <select class="form-control" onchange="setUserCategory(this)" name="company" required="">
+                           <option value="" selected="" disabled="">Select Category to User</option>
+                           {{# each app.category}}
+
+                           <option value="{{id}}" >{{name}}</option>
+                           {{/each}}
+                        </select>
+                  </div>
+                  <h4> User Info </h4> 
+
+                  <table class="table table-striped">
+                     
+                     {{set 'address' user.address}}
+                          <tr>
+                            <th>ID:</th><td> #{{user.id }} </td>
+                           <th>Join on:</th><td> {{user.date }} </td>
+                         </tr>
+                         <tr>
+                          <th>First Name:</th><td> {{user.firstname}} </td>
+                          <th>Last  Name:</th><td> {{user.lastname }} </td>
+                        </tr>
+                          <tr>
+                          <th>Email:</th><td> {{user.email }} </td>
+                          <th>Mobile:</th><td> {{user.phone }} </td>
+                          </tr>
+
+                            <tr>
+                          <th>SITE CODE:</th><td colspan="3"> {{user.siteCode }} </td>
+                        </tr>
+                        <tr>
+                          <th colspan="4">User  PAN Number and GST Number</th></tr>
+                        <tr>
+                          <th>GSTIN:</th><td colspan="3"> {{user.gstNumber }} </td>
+                        </tr>
+                        <tr>
+                          <th>PAN:</th><td colspan="3"> {{user.panNumber }} </td>
+                          </tr>
+
+                        
+                       
+                         
+                            <tr>
+                              <th>
+                            <strong class="text-info">Billing Address:</strong> 
+                            </th><td colspan="3">
+                               <address>
+                              {{#if (eq address.ship_zip '')}}
+                              <h3>Address not found!</h3>
+                              {{else}}
+
+                                  {{#if (eq address.bill_address '')}}
+                                    {{address.ship_first_name}} {{address.ship_last_name}}
+                                    <br>
+                                    {{address.ship_address}}, <br>City: {{address.ship_address_more}}
+                                    <br>
+                                    {{address.ship_state_country}}  {{address.ship_zip}}
+                                    <br>
+                                    Email: {{address.ship_email}}, Phone: {{address.ship_phone}} 
+                                    {{else}}
+
+                                      {{address.bill_first_name}} {{address.bill_last_name}}
+                                        <br>
+                                        {{address.bill_address}}, <br>City: {{address.bill_address_more}}
+                                        <br>
+                                        {{address.bill_state_country}}  {{address.bill_zip}}
+                                        <br>
+                                        Email: {{address.bill_email}}, Phone: {{address.bill_phone}} 
+                                    {{/if}}
+                            {{/if}}
+                          </address>
+                          </td>
+
+                          
+
+
+                        </tr>
+                        <tr>
+
+                            <th>
+                            <strong class="text-info">User Selected Category:</strong> 
+                            </th><td>
+                               {{#each user.category}}
+                                    <div class="del-com-{{categoryId}}">ID: {{categoryId}} , Name: {{category.name}} 
+                                    <a data-user="{{@root.user.id}}" data-category="{{categoryId}}" onclick="deleteUserCategory(this)" class="btn pull-right btn-xs btn-warning">&times;</a>
+                                    <hr>
+                                  </div>
+                               {{/each}}
+                          </td>
+                        </tr>
+                  </table>
+                  
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+     
+
+
+        </div>
+      </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+     {{include 'admin/global/footer'}}
+
+
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{{app.url}}vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="{{app.url}}vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="{{app.url}}vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="{{app.url}}vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="{{app.url}}vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="{{app.url}}vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="{{app.url}}vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="{{app.url}}vendors/jszip/dist/jszip.min.js"></script>
+    <script src="{{app.url}}vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="{{app.url}}vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{app.url}}build/js/custom.min.js"></script>
+    <script type="text/javascript">
+      function setUserCategory(t){
+        var data = {};
+        data.categoryId = jQuery(t).val();
+        data.userId = jQuery('[name="userId"]').val();
+        app.post('/api/add-user-category',data,res=>{
+          app.showToast(res.msg,res.err);
+        })
+    }
+
+    function deleteUserCategory(t){
+        if(confirm("Are you sure to delete this items?")){
+          var data = {};
+          data.userId = jQuery(t).attr('data-user');
+          data.categoryId = jQuery(t).attr('data-category');
+          jQuery('.del-com-'+data.categoryId).remove();
+          app.post('/api/del-user-category',data,res=>{
+              app.showToast(res.msg,res.err);
+          })
+        }else{
+          return false;
+        }
+    }
+    </script>
+
+
+    <div id="OrderUpdateModal" class="modal fade-scale" role="dialog">
+      <div class="modal-dialog custom-size-dialog" style="width:85%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              <h5>Update Order</h5>
+
+            </div>
+
+
+
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-3">
+                <select class="form-control" name="order_status" required>
+                  <option value="" selected disabled>SELECT ORDER STATUS</option>
+                  <option value="Ordered">Ordered</option>
+                  <option value="Ordered">Ordered</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-success">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script>
+  function setTsc(t){
+    var tsc = parseInt($(t).val());
+    if(tsc){
+      var  msg = "Are you sure to add Tcs of Any Goods for this customer";
+      var resMsg = "Success. Tcs of Any Goods added to this customer";
+    }else{
+      var  msg = "Are you sure to remove Tcs of Any Goods for this customer";
+      var resMsg = "Success. Tcs of Any Goods removed to this customer";
+    }
+
+    if(confirm(msg)){
+      var url = "{{app.url}}api/set-tsc";  
+      var data = {tsc,userId:"{{user.id}}"}
+      app.post(url,data,res=>{
+        if(!res.err)
+            app.showToast(resMsg,0);
+        else
+            app.showToast("Sorry! Try again later.",1);
+      });
+    }else{
+      return false;
+    }
+  }
+
+
+  function setCredit(t){
+    var credit  = parseInt($(t).val());
+    if(credit){
+      var  msg = "Are you sure to add credit for this customer";
+      var resMsg = "Success. Credit added to this customer";
+    }else{
+      var  msg = "Are you sure to remove credit for this customer";
+      var resMsg = "Success. Credit removed to this customer";
+    }
+
+    if(confirm(msg)){
+      var url = "{{app.url}}api/set-credit";  
+      var data = {credit,userId:"{{user.id}}"}
+      app.post(url,data,res=>{
+        if(!res.err)
+            app.showToast(resMsg,0);
+        else
+            app.showToast("Sorry! Try again later.",1);
+      });
+    }else{
+      return false;
+    }
+  }
+</script>
+</body>
+
+</html>

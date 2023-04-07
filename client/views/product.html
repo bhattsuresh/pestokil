@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title> {{app.name}} | Product</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+
+
+{{include 'global/header'}}
+
+<style type="text/css">
+	.product-preview,.product-preview .overlay{
+		background-size: 100% 100%; 
+	}
+  .product-list{
+    font-size: 12px;
+  }
+  .cat:hover{
+  	 color: #666;
+  }
+  .cat{
+    padding: 5px 15px;
+    color: #666;
+    text-align:center; 
+  }
+  .cat.active{
+  	color: #666;
+  	background:#efefef59; 
+  	border-bottom: 2px solid #2196F3;
+  	
+  }
+</style>
+
+<section class="mt-5">
+	<div class="container">
+		<big class="font-bold">Select Cetegory</big>
+			 <div class="row">
+              
+			
+		<a href="/" class="small cat cat-1">Default</a>
+       {{#if session.user.isLogged}}
+    
+          {{#each session.user.category}}
+            <a href="?category={{categoryId}}" class="small cat cat-{{categoryId}}">{{category.name}}</a>
+             
+             
+          {{/each}}
+
+      {{/if}}
+       
+   
+			
+		
+	</div>
+	<script>
+		$('.cat-{{categoryId}}').addClass('active');
+	</script>
+	</div>
+</section>
+
+
+<section class="mt-5">
+  <div class="container">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <table class="table product-list">
+              <thead>
+                <tr>
+
+
+                  <th>Image</th><th>Item Code</th><th>Item Name</th><th>Specifications</th><th>MOQ/Per Packet Quantity</th><th>Order Quantity</th><th>Rate/Packet</th><th>Item Value</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                {{#each products}}
+                  <form index="{{@index}}" onsubmit="return addToCart(this)">
+                   <tr>
+                     <td>
+                        <img src="/uploads/products/{{image}}" onclick="setImagePreview(this)" height="35px" title="click to view" style="cursor:pointer">
+                    </td>
+                    <td>{{model}}</td>
+                    <td>{{name}}</td>
+                    <td>{{sortDesc}} </td>
+                   
+                    <td>{{quantity}}</td>
+                    <td>
+                       
+                           {{#if (eq min_quantity 0) }}
+                        <input type="number" index='{{@index}}' style="width: 50px" class="qty" name="qty" value="0" min="1"  required="">
+                        {{else}}
+                        <input type="number" index='{{@index}}' style="width: 50px" class="qty" name="qty" value="0" min="{{min_quantity}}"  required="">
+                        {{/if}}
+                    </td>
+                    <td>
+                      <span class="currency-symbol icon icon-inr"></span>
+                      <span class="product-rate">{{price}}</span>
+                      </td>
+                    
+                    <td>
+                      <span class="currency-symbol icon icon-inr"></span>
+                      <span class="price total-price">{{price}}</span></td>
+                    <td>
+                      
+                        <input type="hidden" class="id" name="id" value="{{id}}">
+                        <input type="hidden" class="rate" name="price" value="{{price}}">
+                        <button type="submit"  class="btn btn-xs btn-info add-to-cart-submit">Add to cart</button>
+                      
+                    </td>
+                        
+                    </tr>
+                   </form>
+                {{/each}}
+
+              </tbody>
+
+            </table>
+          
+        </div>
+
+
+
+       
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-4 offset-md-8 text-right">
+        <table class="table">
+                <tr>
+                  <th colspan="6">Cart Total </th><th class="cart-page-total"></th><th><a href="{{app.url}}cart" class="btn btn-primary">Process to cart</th>
+                </tr>
+              </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{include 'global/footer'}}
+<script type="text/javascript">
+	 $('.qty').change(function(i){
+	 	let index= $(this).attr('index');
+
+	 	var q = parseFloat($(this).val());
+	 	var rate = parseFloat($('.product-rate').eq(index).text());
+	 	let t = q*rate;
+	 	$('.total-price').eq(index).text(t.toFixed(0));
+	 });
+
+   $(()=>{
+    $('.qty').each(function(i){
+    let index= $(this).attr('index');
+
+    var q = parseFloat($(this).val());
+    var rate = parseFloat($('.product-rate').eq(index).text());
+    let t = q*rate;
+    $('.total-price').eq(index).text(t.toFixed(0));
+    });
+   });
+</script>

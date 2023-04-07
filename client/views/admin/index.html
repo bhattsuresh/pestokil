@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{app.name}}</title>
+   <link rel="icon" href="{{app.url}}/images/favicon.png" sizes="32x32" />
+    <link rel="icon" href="{{app.url}}/images/favicon.png" sizes="192x192" />
+    <!-- Bootstrap -->
+    <link href="{{app.url}}vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{app.url}}vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{app.url}}vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{app.url}}vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{{app.url}}build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <!-- top navigation -->
+     {{include 'admin/global/header'}}
+        <!-- /top navigation -->
+
+
+        {{include 'admin/global/sidebar'}}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="row top_tiles">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-users"></i></div>
+                  <div class="count">{{app.dashboard.users}}</div>
+                  <h3>Customers</h3>
+                  <p>Total registered customers.</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+                  <div class="count">{{app.dashboard.all}}</div>
+                  <h3>Orders</h3>
+                  <p>Total orders by customers.</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
+                  <div class="count">{{app.dashboard.current}}</div>
+                  <h3>Current Orders</h3>
+                  <p>Current orders which not delivered.</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-check-square-o"></i></div>
+                  <div class="count">{{app.dashboard.shipped}}</div>
+                  <h3>Delivered Orders</h3>
+                  <p>Orders which delivered.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+            
+
+               <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Latest Order Complaints</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown visible-none">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li><a href="#">Settings 1</a>
+                                  </li>
+                                  <li><a href="#">Settings 2</a>
+                                  </li>
+                                </ul>
+                              </li>
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                         
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content" style=" max-height: 300px; overflow-y: auto;">
+                        <table style="width: 100%">
+                          <tr>
+                            <th>Order Number</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                         {{#each complaints}}
+                            <tr><td> #{{orderId}} </td><td> {{subject}}</td> <td> {{status}}</td><td><a class="btn btn-xs btn-info" href="/admin/order/order-complaint/{{id}}">View</a></td></tr>
+                          {{/each}}
+                          </table>
+                      </div>
+                    </div>
+              </div>
+
+               <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Latest  orders</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown visible-none">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li><a href="#">Settings 1</a>
+                                  </li>
+                                  <li><a href="#">Settings 2</a>
+                                  </li>
+                                </ul>
+                              </li>
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                         
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content" style=" max-height: 300px; overflow-y: auto;">
+                        <table style="width: 100%">
+                          <tr>
+                            <th>Order Number</th>
+                            <th>Amout</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                         {{#each orders}}
+                            <tr><td> #{{id}} </td><td> {{total}}</td> <td> {{orderStatus}}</td><td>
+                              <a class="btn btn-xs btn-primary" href="/admin/order/{{id}}">View</a></td></tr>
+                          {{/each}}
+                          </table>
+                      </div>
+                    </div>
+              </div>
+
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Orders/Users  <small>Per Month</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown visible-none">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li><a href="#">Settings 1</a>
+                                  </li>
+                                  <li><a href="#">Settings 2</a>
+                                  </li>
+                                </ul>
+                              </li>
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                         
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <canvas id="orderChart"></canvas>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Income  <small>Per Month</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown visible-none">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li><a href="#">Settings 1</a>
+                                  </li>
+                                  <li><a href="#">Settings 2</a>
+                                  </li>
+                                </ul>
+                              </li>
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                         
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <canvas id="incomeChart"></canvas>
+                      </div>
+                    </div>
+              </div>
+
+              
+
+            </div>
+
+           
+
+
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        {{include 'admin/global/footer' }}
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{{app.url}}vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="{{app.url}}vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="{{app.url}}vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="{{app.url}}vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="{{app.url}}vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="{{app.url}}vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- Flot -->
+    <script src="{{app.url}}vendors/Flot/jquery.flot.js"></script>
+    <script src="{{app.url}}vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="{{app.url}}vendors/Flot/jquery.flot.time.js"></script>
+    <script src="{{app.url}}vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="{{app.url}}vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="{{app.url}}vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="{{app.url}}vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="{{app.url}}vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="{{app.url}}vendors/DateJS/build/date.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{app.url}}vendors/moment/min/moment.min.js"></script>
+    <script src="{{app.url}}vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    
+    <!-- Custom Theme Scripts -->
+
+    
+    <script src="{{app.url}}build/js/custom.min.js"></script>
+<script>
+  var months =  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var incomeData =  [0,0,0,0,0,0,0,0,0,0,0,0];
+ /*app.get('{{app.url}}api/admin-income-chart',(res)=>{
+    for(i in res){
+      incomeData[(res[i].month-1)]= res[i].total;
+    }
+
+    var d = new Date();
+  var n = d.getMonth();
+  months =months.slice(0, n+1);
+  incomeData =incomeData.slice(0, n+1);
+    initIncomeChart();
+  });*/
+
+
+
+  
+   
+
+  	function initIncomeChart(){	
+			
+      var ctx = document.getElementById("incomeChart");
+      var lineChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+				  labels: months,
+				  datasets: [{
+					label: "# Income",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: incomeData
+				  }]
+				},
+			  });
+    }
+
+
+    var months =  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var orders =  [0,0,0,0,0,0,0,0,0,0,0,0];
+    var users =  [0,0,0,0,0,0,0,0,0,0,0,0];
+  
+
+   /* app.get('{{app.url}}api/admin-order-chart',(res)=>{
+      console.log(res);
+      for(i in res.orders){
+        orders[(res.orders[i].month-1)]= res.orders[i].total;
+      }
+      for(i in res.users){
+
+        users[(res.users[i].month-1)]= res.users[i].total;
+      }
+  
+      var d = new Date();
+    var n = d.getMonth();
+    months =months.slice(0, n+1);
+    orders =orders.slice(0, n+1);
+    users =users.slice(0, n+1);
+      
+      initOrderChart(orders,users);
+    });*/
+
+  	function initOrderChart(orders,users){	
+			
+      var ctx = document.getElementById("orderChart");
+      var mybarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [{
+        label: '# of Orders',
+        backgroundColor: "#26B99A",
+        data: orders
+        }, {
+        label: '# of Users',
+        backgroundColor: "#03586A",
+        data: users
+        }]
+      },
+
+      options: {
+        scales: {
+        yAxes: [{
+          ticks: {
+          beginAtZero: true
+          }
+        }]
+        }
+      }
+      });
+      
+    }
+</script>
+	
+
+  </body>
+</html>

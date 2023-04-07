@@ -1,0 +1,40 @@
+@font-face {
+  font-family: Calibre Regular;
+  src: url(CalibreRegular.otf);
+}
+
+@font-face {
+  font-family: Calibre Medium;
+  src: url(CalibreMedium.otf);
+}
+
+@font-face {
+  font-family: Calibre Light;
+  src: url(CalibreLight.otf);
+}
+
+@font-face {
+  font-family: Raleway Regular;
+  src: url(Raleway-Regular.ttf);
+}
+
+@font-face {
+  font-family: Raleway Light;
+  src: url(Raleway-Light.ttf);
+}
+
+
+@font-face {
+  font-family: Raleway Black;
+  src: url(Raleway-Black.ttf);
+}
+
+@font-face {
+  font-family: Raleway Bold;
+  src: url(Raleway-Bold.ttf);
+}
+
+@font-face {
+  font-family: Raleway ExtraBold;
+  src: url(Raleway-ExtraBold.ttf);
+}

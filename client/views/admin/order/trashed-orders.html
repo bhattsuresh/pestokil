@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Trased Orders</title>
+  <link rel="icon" href="{{app.url}}static/public/images/logo_morningowl_2-300x76.png" sizes="32x32" />
+  <link rel="icon" href="{{app.url}}static/public/images/logo_morningowl_2-300x76.png" sizes="192x192" />
+  <!-- Bootstrap -->
+  <link href="{{app.url}}static/private/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{app.url}}static/private/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{app.url}}static/private/vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{{app.url}}static/private/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link href="{{app.url}}static/private/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+    rel="stylesheet">
+  <link href="{{app.url}}static/private/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="{{app.url}}static/private/build/css/custom.min.css" rel="stylesheet">
+  <style>
+    .input {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      
+
+
+      <!-- top navigation -->
+      {% include 'admin/layouts/header.html' %}
+      {% include 'admin/layouts/sidebar.html' %}
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+
+            </div>
+
+            <!-- <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>-->
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Trashed orders<small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                          class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  
+                  
+
+
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>S.No</th>
+                          <th>ORDER ID</th>
+                          <th>Sub total</th>
+                          <th>Coupon Discount</th>
+                          <th>Paid total</th>
+                          <th>Order Status</th>
+                          <th>Action</th>
+
+                        </tr>
+                      </thead>
+                      <tbody class="product-variation">
+                          {% set total = 0 %}
+                        {% for i,order in orders %}
+                            {% set total = total + order.total %}
+                        <tr class="pro-tr-{{i}}">
+                          <td>{{i+1}}</td>
+                          <td>#{{order._id}}</td>
+                          <td>{{order.sub_total}}</td>
+                          <td>{{order.discount}}</td>
+                          <td>{{order.total}}</td>
+                          <td>{{order.order_status}}</td>
+                          <td>
+                    
+                            
+                            <a  onclick="return confirm('Are You sure to delete this order permanently')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
+                          </td>
+                        </tr>
+
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="4">Total</td>
+                          <td colspan="3">{{total}}</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      {% include 'admin/layouts/footer.html' %}
+
+
+      <!-- /footer content -->
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="{{app.url}}static/private/vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="{{app.url}}static/private/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="{{app.url}}static/private/vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="{{app.url}}static/private/vendors/nprogress/nprogress.js"></script>
+  <!-- iCheck -->
+  <script src="{{app.url}}static/private/vendors/iCheck/icheck.min.js"></script>
+  <!-- Datatables -->
+  <script src="{{app.url}}static/private/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="{{app.url}}static/private/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="{{app.url}}static/private/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="{{app.url}}static/private/build/js/custom.min.js"></script>
+  <script>
+    var length = 0;
+
+    function editProduct(th) {
+      var i = $(th).attr('value');
+      $('.input-' + i).attr('type', 'text');
+      $('.pro-tr-' + i + ' span').hide();
+      $(th).html('<i class="fa fa-save"></i> Save')
+      .attr('onclick','saveProduct(this)')
+      .removeClass('btn-warning')
+      .addClass('btn-info');
+    }
+
+
+    function saveProduct(th) {
+      var i = $(th).attr('value');
+      var data = {
+        id:$('[name="product['+i+']"]').val(),
+        product:{
+          category:$('[name="category['+i+']"]').val(),
+          size:$('[name="size['+i+']"]').val(),
+          thickness:$('[name="thickness['+i+']"]').val(),
+          price:$('[name="price['+i+']"]').val(),
+        },
+      
+      };
+      $.ajax({
+        type: 'POST',
+        url: $(th).attr('action'),
+        data:data,
+        success: function (res) {
+          if(res.success){
+            $('.input-' + i).attr('type', 'hidden');
+           
+            $(th).html('<i class="fa fa-pencil"></i> Edit')
+            .attr('onclick','editProduct(this)')
+            .removeClass('btn-info')
+            .addClass('btn-warning');
+
+           $('.input-' + i).each(function(j){
+              $('.pro-tr-' + i + ' span').eq(j).text($(this).val());
+             
+            });
+            $('.pro-tr-' + i + ' span').show();
+            app.showToast('Saved Successful','success');
+           
+          }else{
+            app.showToast('This vriation already added','error');
+          }
+
+        }
+      });
+      return false;
+    }
+
+    function addProduct(th){
+      var url = $(th).attr('action');
+      if(length == 0)
+          length = parseInt($(th).attr('length'));
+
+      formData = new FormData(th);
+      app.post(url,formData,(res)=>{
+        if(res.id){
+          app.showToast('added Successful','success');
+          var tr = '<tr class="pro-tr-'+length+' " role="row">\
+              <td tabindex="0" class="sorting_1">'+(length+1)+' <input type="hidden" name="product['+length+']" value="'+res.id+'"></td>\
+              <td> <span>'+res.category+'</span> <input type="hidden" name="category['+length+']" class="input input-'+length+'" value="'+res.category+'"></td>\
+              <td><span>'+res.size+' </span> <input type="hidden" name="size['+length+']" class="input input-'+length+'" value="'+res.size+'"></td>\
+              <td> <span> '+res.thickness+'</span> <input type="hidden" name="thickness['+length+']" class="input input-'+length+'" value="'+res.thickness+'"></td>\
+              <td><span>'+res.price+' </span> <input type="hidden" name="price['+length+']" class="input input-'+length+'" value="'+res.price+'"></td>\
+              <td> <a type="button" class="btn btn-warning btn-xs" value="'+length+'" onclick="editProduct(this)" action="{{app.url}}admin/product-update"><i class="fa fa-pencil"></i> Edit</a></td>\
+            </tr>';
+            $('.product-variation').append(tr);
+            length++;
+        }else{
+          app.showToast('This vriation already added','error');
+        }
+      },true);
+      return false;
+    }
+  </script>
+
+</body>
+
+</html>

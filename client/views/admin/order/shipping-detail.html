@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> {{app.name}} | Shipping detail</title>
+
+    <!-- Bootstrap -->
+    <link href="{{app.url}}vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{app.url}}vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{app.url}}vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+    <!-- Custom styling plus plugins -->
+    <link href="{{app.url}}build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+      .ship-tbl tr th,.ship-tbl tr td{
+        padding: 3px 5px;
+      }
+
+      @media print{
+       body :not(.print){
+          visibility: hidden;
+          height: 0;
+      }
+	  
+	  svg *{
+		 visibility: visible !important;
+		  height: 100px !important;
+	  }
+
+      body .print *{
+          visibility: visible !important;
+		  
+      }
+        .no-print{
+          display: none;
+        }
+		
+		@page {
+		  size: 250mm 200mm;
+		}
+      }
+	  
+	
+     
+   
+    </style>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+
+
+            <!-- top navigation -->
+      {{ include 'admin/global/header' }}
+
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <div class="menu_section">
+          <h3>General</h3>
+          <ul class="nav side-menu">
+            <li><a href="javascript:history.go(-1)">
+                <i class="fa fa-arrow-left"></i> Go Back </a>
+            </li>
+            <li><a href="javascript:0"><i class="fa fa-shopping-cart"></i> Shipping & Invoices <span
+                  class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{app.url}}admin/shipping-detail/{{shipping.id}}">Shipping Detail</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /sidebar menu -->
+      {{ include 'admin/global/sidebar2' }}
+      <!-- page content -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <!--h3>Invoice <small></small></h3-->
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <!--input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button-->
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Shipping detail <small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                                       
+                           <small class="text-center"></small>
+                                      </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info print">
+
+                        <table border="1" class="ship-tbl" style="width: 100%">
+                          <tr>
+                            <td rowspan="6"></td>
+                            <td><strong>Customer Name</strong></td>
+                            <td>{{shipping.user.firstname}} {{shipping.user.lastname}}</td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Shipping Address</strong></td>
+                            <td>
+                                 <br>{{shipping.user.address.ship_address}}
+                                          <br>{{shipping.user.address.ship_address_more}}
+                                          <br>{{shipping.user.address.ship_state_country}}, PIN - {{shipping.user.address.ship_zip}}
+                            </td>
+                            <td><strong>Order Number:</strong> #{{shipping.order.id}}</td>
+                          </tr>
+
+                              <tr>
+                            <td> <br></td>
+                            <td>
+                            
+                            </td>
+                            <td rowspan="3">
+
+                                <svg id="barcode" class="print"></svg>
+                                <br>
+                                  <b>Dispatch From:</b> {{shipping.dispatchFrom}}
+                                <br>
+                                <b>Vehicle Number:</b> {{shipping.vehicleNumber}}
+                                <br>
+                                
+                                <b>Driver Contact:</b> {{shipping.shipperContact}}
+                                <br>
+                                <b>Shiping Detail:</b> {{shipping.detail}}
+								
+								
+								
+							
+                             
+                            
+                            </td>
+                          </tr>
+
+
+                          <tr>
+                            <td><strong>Contact Details</strong></td>
+                            <td>
+                                          Phone: {{shipping.user.address.ship_phone}}
+                                          <br>Email: {{shipping.user.address.ship_email}}
+                            </td>
+                            
+                          </tr>
+
+                          <tr>
+                            <td><strong>Route number</strong></td>
+                            
+                            <td>
+                            {{shipping.order.routeNumber}}
+                            </td>
+                          </tr>
+
+                            <tr>
+                            <td> <br></td>
+                            <td>
+                            
+                            </td>
+                            <td>
+                            
+                            </td>
+                          </tr>
+
+
+
+
+
+                              <tr>
+                                <th>S no</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th style="width:40%">Remarks</th>
+                             
+                              </tr>
+                           
+
+                              {{#each shippingItems}}
+                              <tr>
+                                <td>{{inc @index}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{qty}}</td>
+                                <td>
+                                  
+                                </td>
+                               
+                              </tr>
+                              
+                              {{add 'total' (math rate qty '*') }}
+                            {{/each}}
+
+                               
+
+                        </table>
+
+                        <!-- /.col -->
+                    
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                    
+                      <!-- /.row -->
+
+                   
+                      <!-- /.row -->
+
+                      <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <br>
+                        <br>
+                        <div class="col-xs-12 text-center">
+                          <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+                          
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <div class="no-print">
+        {{include 'admin/global/footer'}}
+      </div>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{{app.url}}vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="{{app.url}}vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="{{app.url}}vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="{{app.url}}vendors/nprogress/nprogress.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{app.url}}build/js/custom.min.js"></script>
+    <script src="{{app.url}}js/JsBarcode.all.min.js"></script>
+	<script>JsBarcode("#barcode", " {{shipping.orderId}}");</script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+{{include 'global/header'}}
+
+<style type="text/css">
+    .razorpay-payment-button{
+        border:none;
+        padding: 5px;
+        position: relative;
+        background: #216194;
+        color: #fff;
+        -webkit-transition: .2s all ease-in-out!important;
+        -o-transition: .2s all ease-in-out!important;
+        transition: .2s all ease-in-out!important;
+        top: 0;
+        letter-spacing: .05em;
+
+    }
+
+    .razorpay-payment-button:hover {
+        -webkit-box-shadow: 0 5px 20px -7px rgba(0, 0, 0, .9)!important;
+        box-shadow: 0 5px 20px -7px rgba(0, 0, 0, .9)!important;
+        top: -2px;
+        cursor: pointer;
+    }
+</style>
+ 
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="icon-check_circle display-3 text-success"></span>
+
+            <h3>Thank you for your order! </h3>
+            
+     {{#if (eq session.paymentMethod 'BankTransfer')}}     
+     
+      <h3 class="mt-5">Upload a payment proof of bank tarnsfer! </h3>  
+      <p class="text-warning">{{session.info.message}}</p> 
+    <form ref='uploadForm' id='uploadForm' action='/upload-payment'  method='post' encType="multipart/form-data">
+        <div class="row mt-4">
+            <div class="col-md-4 offset-md-3">
+                
+                <input type="file" name="paymentProof" class="form-control" accept="image/*" required="" />
+            </div>
+            <div class="col-md-2">
+                <input type='submit' class="btn btn-info btn-block" value='Upload!' />
+            </div>
+        </div>
+    </form>   
+    
+ {{/if}} 
+            <!--
+            <p><br> please click the button below to pay with Razorpay</p>
+            <form action="{{app.url}}response" onsubmit="showMessage()" name="razorpayform" id="razorpay" method="POST">
+               
+                <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="{{key_id}}"
+                    data-amount="{{app.session.payment_order.amount}}"
+                    data-currency="{{app.session.payment_order.currency}}"
+                    data-order_id="{{app.session.payment_order.razorpay_order_id}}"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="Morning Owl"
+                    data-description="Morning Owl Payment"
+                    data-image="{{app.url}}static/public/images/logo.png"
+                    data-prefill.name="{{app.session.user.first_name}} {{app.session.user.last_name}}"
+                    data-prefill.email="{{app.session.user.email}}"
+                    data-prefill.contact="{{app.session.user.phone}}"
+                    data-theme.color="#2c6898"
+                ></script>
+                   <button id="btn-razorpay-cancel" class="btn" onclick="document.razorpayform.submit()">Cancel</button>  
+                </form>
+            -->
+                <script>
+               /* var razorpay = document.querySelector('.razorpay-payment-button');
+                        razorpay.click();
+                function showMessage(){
+                    $('#msg-razorpay-success').removeClass('hide');
+                }
+*/
+               
+
+
+
+                </script>
+
+                <p id="msg-razorpay-success" class="text-success hide">
+                    Please wait while we are processing your payment.
+                </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{{include 'global/footer'}}

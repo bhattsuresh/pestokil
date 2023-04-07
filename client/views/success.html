@@ -1,0 +1,81 @@
+{{include 'global/header'}}
+
+ 
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="icon-check_circle display-3 text-success"></span>
+            <h2 class="display-3 text-black">Thank you!</h2>
+            <p class="lead mb-5">Your order has been successfully placed. <br>
+                 Your Order ID <big style="color:#17a2b8">#{{session.user.orderId}}</big> Total Amount to 
+                    be Paid. <big style="color:#17a2b8">Rs.{{session.user.orderAmount}}</big>
+                    <br> <small style="font-size: 15xpx"> Your order will be dispatched within 48 to 72 Hrs.
+                          After Post receipt of the payment</small></p>
+
+
+            	{{#if session.user.orderId }}
+
+            		<form method="post" action="/update-order">
+            				{{#if result.purchaseOrder}}
+            					Purchase Order Number :{{result.purchaseOrder}}
+            				{{else}}
+            					
+            				<p>Please add your purchase order number <br><small> This is optional</small></p>
+            			
+            				<div class="row">
+
+            					<input name="purchaseOrder" value="{{result.purchaseOrder}}"  class="form-control col-md-3 offset-md-4"  placeholder="Purchase order number">
+
+            					<button type="submit"  class="btn btn-info col-md-1">Add</button>
+            				</div>
+            				{{/if}}
+
+            				{{#if (eq result.err 1)}}
+            					<p> <b class="text-danger">{{result.msg}}</b></p>
+            				{{else}}
+            					<p> <b class="text-success">{{result.msg}}</b></p>
+            				{{/if}}
+            			<br>
+            			<br>
+            		</form>
+            	{{/if}}
+
+
+            <p><a href="{{app.url}}" class="btn btn-sm btn-primary">Back to Home</a>
+            <a href="{{app.url}}dashboard" class="btn btn-sm btn-primary">Go to Dashboard</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+ <script type="text/javascript">
+  $(()=>{
+   setTimeout(()=>{
+      resetCart();
+      var arr = [];
+       localStorage.setItem("cartItems", JSON.stringify(arr));
+       //var n = localStorage.getItem("cartItems", JSON.stringify(arr));
+      $(".cart-counter").text(arr.length);
+   },100);
+ });
+
+
+ </script>
+
+
+ <script type="text/javascript">
+   /*setTimeout(()=>{
+      var url = "{{app.url}}api/update-user-account";
+      var data = {a:123};
+      app.post(url,data,(res)=>{
+        console.log(res);
+      });
+   },100);*/
+ </script>
+
+{{include 'global/footer'}}
