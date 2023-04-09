@@ -2,13 +2,42 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 require('dotenv').config();
-
-const PORT = process.env.PORT
+const session = require('express-session');
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 let con = null;
 const hbs = require('hbs')
 
+const TWO_HOURS = 1000 * 60 ;
+const {
+  PORT=5000,
+  NODE_ENV = 'developement',
+  SESS_NAME = 'cosmossid',
+  SESS_SECRET = 'WE32DS$#$@#@',
+  SESS_LIFETIME = TWO_HOURS
+} = process.env;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+
+
+
+app.use(session({
+    name: SESS_NAME,
+    secret: SESS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: new SequelizeStore({
+      db: require('./src/models').sequelize,
+      cleanup: true
+    }),
+    /*cookie: {
+        maxAge: SESS_LIFETIME,
+        sameSite:true,
+        secure:IN_PROD
+    }*/
+}));
 
 app.set('views', __dirname + '/src/views');
 app.use(express.static(__dirname + '/src/public'));
@@ -20,6 +49,7 @@ app.use('/',require('./src/routes/web'));
 
 
 app.use((req,res)=>{
+
   res.render('404');
 });
 
@@ -30,13 +60,44 @@ app.locals.config = config;
 app.config = config;
 
 hbs.registerHelper('include', function (view,args,options) {
- 
-  let data = {config,data:args}
   
+  let data = {config,data:args}
+  data.session=app.locals.session;
+  console.log(data.session);
+
 	let file = __dirname + '/src/views/' + view+'.html';
     var template = hbs.compile(fs.readFileSync(file, 'utf8'));
     return new hbs.handlebars.SafeString(template(data));
 });
+
+
+hbs.registerHelper("counter", function(value, options){   
+  return parseInt(value) + 1;
+}); 
+
+hbs.registerHelper("dateFormat", function(value, options) {
+    let months = ['Jan','Feb','Mar', 'Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let d = new Date(value);
+    return d.getDate()+'-'+months[d.getMonth()]+'-'+d.getFullYear();
+});
+
+hbs.registerHelper({
+    not:(v1) => !v1,
+    eq: (v1, v2) => v1 == v2,
+    eqt: (v1, v2) => v1 === v2,
+    ne: (v1, v2) => v1 != v2,
+    net: (v1, v2) => v1 !== v2,
+    lt: (v1, v2) => v1 < v2,
+    gt: (v1, v2) => v1 > v2,
+    lte: (v1, v2) => v1 <= v2,
+    gte: (v1, v2) => v1 >= v2,
+    and() {
+      return Array.prototype.every.call(arguments, Boolean);
+    },
+    or() {
+      return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    }
+  });
 
 
 app.listen(PORT,()=>{
