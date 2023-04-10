@@ -8,13 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      company: {
-        type: Sequelize.INTEGER
-      },
-      firstname: {
-        type: Sequelize.STRING
-      },
-      lastname: {
+      name: {
         type: Sequelize.STRING
       },
       email: {
@@ -22,7 +16,7 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      phone: {
+      username: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
@@ -30,36 +24,10 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      siteCode: {
-        type: Sequelize.STRING(50)
-      },
-      gstNumber: {
-        type: Sequelize.STRING(50)
-      },
-      panNumber: {
-        type: Sequelize.STRING(30)
-      },
-      address: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
       active: {
         type: Sequelize.INTEGER(1),
         allowNull: true,
         defaultValue: "0",
-      },
-      tsc: {
-        type: Sequelize.INTEGER(1),
-        allowNull: true,
-        defaultValue: "0"
-      }, 
-      credit: {
-        type: Sequelize.INTEGER(1),
-        allowNull: true,
-        defaultValue: "0"
-      },
-      date: {
-        type: Sequelize.STRING(20)
       },
       createdAt: {
         allowNull: false,
