@@ -31,19 +31,22 @@ router.get('/master/new-exporter',toUserLogin,(req,res)=>{
 });
 
 
-router.post('/master/new-exporter',toUserLogin,(req,res)=>{
+router.post('/master/new-exporter',toUserLogin,require('../controllers/MasterController').addExporter);
+router.get('/exporter/active/:id/:val',toUserLogin,require('../controllers/MasterController').activeExporter);
+
+
+router.get('/master/all-exporter',toUserLogin,require('../controllers/MasterController').getExporter);
+
+router.get('/master/new-consignee',toUserLogin,(req,res)=>{
+	res.render('master/new-consignee');
+});
+
+
+router.post('/master/new-consignee',toUserLogin,(req,res)=>{
     var data = req.body;
     //var companyName = data.name
     res.json(data);
     //res.render('master/new-exporter');
-});
-
-router.get('/master/all-exporter',toUserLogin,(req,res)=>{
-	res.render('master/all-exporter');
-});
-
-router.get('/master/new-consignee',toUserLogin,(req,res)=>{
-	res.render('master/new-consignee');
 });
 
 router.get('/master/all-consignee',toUserLogin,(req,res)=>{
@@ -52,6 +55,14 @@ router.get('/master/all-consignee',toUserLogin,(req,res)=>{
 
 router.get('/master/new-billing-party',toUserLogin,(req,res)=>{
 	res.render('master/new-billing-party');
+});
+
+
+router.post('/master/new-billing-party',toUserLogin,(req,res)=>{
+    var data = req.body;
+    //var companyName = data.name
+    res.json(data);
+    //res.render('master/new-exporter');
 });
 
 router.get('/master/all-billing-party',toUserLogin,(req,res)=>{

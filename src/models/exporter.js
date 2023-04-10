@@ -21,10 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
-    pincode: DataTypes.NUMBER,
+    pincode: DataTypes.INTEGER,
     mobile: DataTypes.STRING,
     phone: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    active:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'exporter',

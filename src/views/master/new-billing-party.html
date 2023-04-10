@@ -1,0 +1,128 @@
+
+{{include 'layouts/header'}}
+
+ 
+     
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">New billing master</h4>
+                  <p class="card-description">
+                    Add detail of new billing <br>
+                    <em class="text-danger pull-right">* indicates mandatory field</em>
+                  </p>
+
+          <form class="forms-sample" method="post">
+          	<div class="row">
+          		<div class="col">
+		            <div class="form-group">
+		              <label for="company">*Company:</label>
+		              <input type="text" class="form-control" name="company" id="company" placeholder="Company Name" required="">
+		            </div>
+	        	</div>
+	        	<div class="col">
+		            <div class="form-group">
+		              <label for="name">Name:</label>
+		              <input type="text" class="form-control" name="name" id="name" placeholder="Your Name">
+		            </div>
+	        	</div>
+	        </div>
+
+	        <div class="row">
+          		<div class="col">
+		            <div class="form-group">
+		              <label for="address">*Address:</label>
+		              <input type="text" class="form-control" name="address" id="address" placeholder="Address" required="">
+		            </div>
+	        	</div>
+	        	
+	        </div>
+
+	       <div class="row">
+          		<div class="col">
+		            <div class="form-group">
+		              <label for="city">*City:</label>
+		              <input type="text" maxlength="50" class="form-control" name="city" id="city" placeholder="City Name" required="">
+		            </div>
+	        	</div>
+	        	<div class="col">
+		            <div class="form-group">
+		              <label for="state">*State:</label>
+		              <input type="text" maxlength="50" class="form-control" name="state" id="state" placeholder="State Name" required="">
+		            </div>
+	        	</div>
+	        	<div class="col">
+		            <div class="form-group">
+		              <label for="country">Country:</label>
+		              <input type="text" class="form-control" name="country" id="country" placeholder="Country Name">
+		            </div>
+	        	</div>
+	        	<div class="col">
+		            <div class="form-group">
+		              <label for="pincode">Pincode:</label>
+		              <input type="text" maxlength="6" pattern="[0-9]+" class="form-control" name="pincode" id="pincode" placeholder="Pincode">
+		            </div>
+	        	</div>
+	        </div>
+	        <div class="row">
+          		<div class="col">
+		            <div class="form-group">
+		              <label for="mobile">Mobile:</label>
+		              <input type="text" pattern="[0-9]+" maxlength="13" class="form-control" name="mobile" id="mobile" placeholder="Mobile">
+		            </div>
+	        	</div>
+	        	<div class="col">
+		            <div class="form-group">
+		              <label for="phone">Phone:</label>
+		              <input type="text" pattern="[0-9]+" maxlength="13" class="form-control" name="phone" id="phone" placeholder="Phone">
+		            </div>
+	        	</div>
+	        	<div class="col-md-6">
+		            <div class="form-group">
+		              <label for="email-id">Email-ID:</label>
+		              <input type="email" maxlength="70" class="form-control" name="email" id="email-id" placeholder="Email-ID">
+		            </div>
+	        	</div>
+	        </div>
+	        <div class="row">
+
+				<div class="col-md-6">
+		            <div class="form-group">
+		              <label for="allowCertificate ">* Allow Certificate Without Invoice:</label>
+		              <select type="text" class="form-control" name="allowCertificate" id="allowCertificate">
+		              	<option value="no">No</option>
+		              	<option value="yes" selected="">Yes</option>
+		              </select>
+		            </div>
+	        	</div>
+	        	<div class="col-md-6">
+		            <div class="form-group">
+		              <label for="gstin">GSTIN NO:</label>
+		              <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" name="gstin" id="gstin" placeholder="GSTIN Number">
+		            </div>
+	        	</div>
+
+	        </div>
+	        
+
+
+
+	            <button type="submit" class="btn btn-primary me-2">Submit</button>
+	            <button type="reset" class="btn btn-light">Cancel</button>
+        	
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+        <!-- content-wrapper ends -->
+ 
+
+
+
+ {{include 'layouts/footer'}}

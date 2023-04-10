@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       pincode: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       mobile: {
         type: Sequelize.STRING
@@ -41,6 +41,11 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING
+      },
+      active: {
+        type: Sequelize.INTEGER(1),
+        allowNull: true,
+        defaultValue: "0",
       },
       createdAt: {
         allowNull: false,

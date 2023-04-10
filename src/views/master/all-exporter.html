@@ -8,16 +8,25 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">All Exporter</h4>
-                  <!-- <p class="card-description">
-                    Add class <code>.table</code>
-                  </p> -->
+                  <p class="card-description">
+                    {{# if session.info.err }}
+                     <i><code>{{session.info.msg}}</code></i>
+                     {{else}}
+                     <i class="text-success">{{session.info.msg}}</i>
+                     {{/if}}
+                  </p>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Username</th>
+                          <th>#</th>
+                          <th>Exporter</th>
+                          <th>Contact Person</th>
+                          <th>City</th>
+                          <th>State</th>
+                          <th>Country</th>
+                          <th>Phone No</th>
+                          <th>Mobile No</th>
                           <th>Date</th>
                           <th>Status</th>
                           <th>Action</th>
@@ -27,11 +36,16 @@
                         
                         
 
-                        {{#each users }}
+                        {{#each data }}
                           <tr>
+                            <td>{{id}}</td>
+                            <td>{{company}}</td>
                             <td>{{name}}</td>
-                            <td>{{email}}</td>
-                            <td>{{username}}</td>
+                            <td>{{city}}</td>
+                            <td>{{state}}</td>
+                            <td>{{country}}</td>
+                            <td>{{phone}}</td>
+                            <td>{{mobile}}</td>
                             <td>{{dateFormat createdAt}}</td>
                             <td>
                               {{#if active }}
@@ -42,9 +56,9 @@
                             </td>
                             <td>
                                {{#if active }}
-                               <a href="/users/active/{{id}}/0" class="btn btn-danger btn-sm">Inactive</a>
+                               <a href="/exporter/active/{{id}}/0" class="btn btn-danger btn-sm">Inactive</a>
                               {{else}}
-                              <a href="/users/active/{{id}}/1" class="btn btn-success btn-sm">Active</a>
+                              <a href="/exporter/active/{{id}}/1" class="btn btn-success btn-sm">Active</a>
                               {{/if}}
                               </td>
                           </tr>
