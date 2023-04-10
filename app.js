@@ -11,27 +11,25 @@ const TWO_HOURS = 1000 * 60 ;
 const {
   PORT=5000,
   NODE_ENV = 'developement',
-  SESS_NAME = 'cosmossid',
-  SESS_SECRET = 'WE32DS$#$@#@',
+  SESS_NAME = 'pestossid',
+  SESS_SECRET = 'WE36DS$#$@#@',
   SESS_LIFETIME = TWO_HOURS
 } = process.env;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const IN_PROD = NODE_ENV === 'production'
 
 
-
-
-
+var sessionStore = new SequelizeStore({
+      db: require('./src/models').sequelize,
+      cleanup: true
+    });
+sessionStore.sync()
 app.use(session({
     name: SESS_NAME,
     secret: SESS_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: new SequelizeStore({
-      db: require('./src/models').sequelize,
-      cleanup: true
-    }),
+    store: sessionStore,
     /*cookie: {
         maxAge: SESS_LIFETIME,
         sameSite:true,
@@ -39,8 +37,17 @@ app.use(session({
     }*/
 }));
 
+app.use((req,res,next)=>{
+  app.locals.session = req.session;
+  next();
+});
+
 app.set('views', __dirname + '/src/views');
 app.use(express.static(__dirname + '/src/public'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.set('view engine', 'html');
 app.engine('html', hbs.__express)
@@ -49,12 +56,11 @@ app.use('/',require('./src/routes/web'));
 
 
 app.use((req,res)=>{
-
   res.render('404');
 });
 
 const config = require('./src/config/setting');
-//for web object global in client
+//for app object global in client we can use config.[property] to access all config
 app.locals.config = config;
 // for server side get config obj in req.app.config
 app.config = config;
@@ -62,8 +68,8 @@ app.config = config;
 hbs.registerHelper('include', function (view,args,options) {
   
   let data = {config,data:args}
-  data.session=app.locals.session;
-  console.log(data.session);
+   // this code is use for session on include layouts
+   data.session=app.locals.session;
 
 	let file = __dirname + '/src/views/' + view+'.html';
     var template = hbs.compile(fs.readFileSync(file, 'utf8'));

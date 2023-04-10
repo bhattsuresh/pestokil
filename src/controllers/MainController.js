@@ -15,6 +15,10 @@ class MainController{
       res.render('index',{data:{name:"SB",age:56}})
      }
 
+   dashboard(req,res){
+      res.render('dashboard')
+     }
+
     about(req,res){
       res.render('about')
     }
@@ -83,17 +87,7 @@ class MainController{
 		  
     }
 
-    dashboard(req,res){
-
     
-      db.order.findAll({where:{userId:req.session.user.id},order: [['updatedAt', 'DESC']]}).then(result=>{
-        
-         res.render('user/index',{orders:result});
-      }).catch(e=>{
-        res.render('user/index');
-      })
-      
-    } 
 
     trackOrder(req,res){
       var id = req.params.id;

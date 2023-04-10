@@ -15,7 +15,7 @@ class UserController{
 					.render('c-signup',{firstname:data.firstname})
 					.send((e,r)=>{console.log(e,r)});*/
 			   	req.session.user = result;
-				   res.redirect('/users');
+				   res.redirect('/login');
 			   })
 			   .catch(err=>{
 			   
@@ -26,6 +26,7 @@ class UserController{
 	}
 
 	 users(req, res) {
+
     const { Op } = require("sequelize");
    /* var year = req.params.year;
     if (!year) year = app.year;
@@ -39,6 +40,7 @@ class UserController{
 
     db.user.findAll({order: [['createdAt', 'DESC']]})
       .then((users) => {
+      	 
          res.render("users", {users});
       })
       .catch((err) => console.log(err));
@@ -63,12 +65,13 @@ class UserController{
 
 	login(req,res){
 		req.session.info = {};
-		var email = req.body.signin.email,
-            password = req.body.signin.password;
+		var username = req.body.username,
+            password = req.body.password;
 			
-		db.user.findOne({ where: { email:email } }).then(function (user) {
+		db.user.findOne({ where: { username:username } }).then(function (user) {
             if(!user){
-				res.json({err:1,msg:"User Not found!"});
+				req.session.info = {err:1,msg:"User Not found!"};
+						res.render('login');
 			}
 			else{
 				
@@ -80,29 +83,33 @@ class UserController{
 
 						if(user.active){
 							req.session.user = user.dataValues;
-							req.session.user.address = JSON.parse(req.session.user.address);
+							//req.session.user.address = JSON.parse(req.session.user.address);
 							req.session.user.isLogged=true;
 							req.session.info = {err:0,msg:"Login Success"};
 							let url = req.session.history == undefined ? '/':req.session.history.pop();
-							db.usercategory.findAll({
+							/*db.usercategory.findAll({
 								where:{userId:user.id},
 								include: [
 						        {model:db.category,attributes:['name']}
 						        ]}).then(r=>{
 
 								req.session.user.category = r;
-								res.json({err:0,msg:"Login successful! Please wait...",url});
+								res.redirect('users');
+								//res.json({err:0,msg:"Login successful! Please wait...",url});
 							}).catch(e=>{
 								res.json({err:1,msg:"Account not active yet...",url});
-							})
-						    							
+							})*/
+						    	
+						    	res.redirect('dashboard');						
 							
 							
 						}else{
-							res.json({err:1,msg:"Account not active yet."});
+							req.session.info = {err:1,msg:"Account not active yet."};
+							res.render('login');
 						}
 					}else{
-						res.json({err:1,msg:"Password Incorrect"});
+						req.session.info = {err:1,msg:"Password Incorrect"};
+						res.render('login');
 					}
 					});
 					
@@ -110,7 +117,9 @@ class UserController{
 			}	
 			
 		}).catch(e=>{
-			res.json({err:1,msg:"Sorry Login error"});
+			
+			req.session.info = {err:1,msg:"Sorry Login error"};
+						res.render('login');
 		})
 		
 	}
@@ -313,15 +322,15 @@ orderShipping(req, res){
 	            if(err) {
 	                return next(err);
 	            } else {
-	        		res.clearCookie('cosmossid');
+	        		res.clearCookie(process.env.SESS_NAME);
 	                req.session = null;
 	                console.log("logout successful");
-	                return res.redirect('/account');
+	                return res.redirect('/login');
 	            }
 	        });
 	        
 		    } else {
-		        return res.redirect('/account');
+		        return res.redirect('/login');
 		    }
 	}
 

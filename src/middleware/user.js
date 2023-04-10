@@ -10,7 +10,7 @@ var toUserLogin = (req, res, next) => {
      if(req.session.history.length >2)
      	req.session.history.shift();
 
-     !user?res.redirect('/account'):next();
+     !user?res.redirect('/'):next();
    
 
  };
@@ -18,7 +18,7 @@ var toUserLogin = (req, res, next) => {
  var toUserHome = (req, res, next) => {
     const {user} = req.session;
     
-    user?res.redirect('/'):next();
+    user?res.redirect('/dashboard'):next();
  };
 
 
