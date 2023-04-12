@@ -7,7 +7,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">All Exporter</h4>
+                  <h4 class="card-title">All Billing Party</h4>
                   <p class="card-description">
                     {{# if session.flush.err }}
                      <i><code>{{session.flush.msg}}</code></i>
@@ -20,13 +20,14 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Exporter</th>
+                          <th>Billing Party</th>
                           <th>Contact Person</th>
                           <th>City</th>
                           <th>State</th>
                           <th>Country</th>
                           <th>Phone No</th>
                           <th>Mobile No</th>
+                          <th>GSTIN</th>
                           <th>Date</th>
                           <th>Status</th>
                           <th>Action</th>
@@ -46,6 +47,7 @@
                             <td>{{country}}</td>
                             <td>{{phone}}</td>
                             <td>{{mobile}}</td>
+                            <td>{{gstin}}</td>
                             <td>{{dateFormat createdAt}}</td>
                             <td>
                               {{#if active }}
@@ -56,9 +58,9 @@
                             </td>
                             <td>
                                {{#if active }}
-                               <a href="/master/exporter/active/{{id}}/0" class="btn btn-danger btn-sm">Inactive</a>
+                               <a href="/master/billing-party/active/{{id}}/0" class="btn btn-danger btn-sm">Inactive</a>
                               {{else}}
-                              <a href="/master/exporter/active/{{id}}/1" class="btn btn-success btn-sm">Active</a>
+                              <a href="/master/billing-party/active/{{id}}/1" class="btn btn-success btn-sm">Active</a>
                               {{/if}}
                               </td>
                           </tr>

@@ -3,17 +3,17 @@ class AdminController {
 
     constructor(){
        
-         if(app.dashboard == undefined){
-            app.dashboard = {};
+         if(config.dashboard == undefined){
+            config.dashboard = {};
             const { Op } = require("sequelize");
 
 
-            db.user.count().then(users=>{app.dashboard.users = users;}).catch(e=>{console.log(e)});  
-            db.order.count().then(all=>{app.dashboard.all = all;}).catch(e=>{console.log(e)});  
+            db.user.count().then(users=>{config.dashboard.users = users;}).catch(e=>{console.log(e)});  
+            db.order.count().then(all=>{config.dashboard.all = all;}).catch(e=>{console.log(e)});  
             db.order.count({where:{orderStatus: {
-            [Op.ne]: 'Shipped'}}}).then(current=>{app.dashboard.current = current;}).catch(e=>{console.log(e)});  
+            [Op.ne]: 'Shipped'}}}).then(current=>{config.dashboard.current = current;}).catch(e=>{console.log(e)});  
              
-            db.order.count({where:{orderStatus:'Shipped'}}).then(shipped=>{app.dashboard.shipped = shipped;}).catch(e=>{console.log(e)}); 
+            db.order.count({where:{orderStatus:'Shipped'}}).then(shipped=>{config.dashboard.shipped = shipped;}).catch(e=>{console.log(e)}); 
         }
        
     }
@@ -23,7 +23,7 @@ class AdminController {
     let data = req.body.signup;
     let app_key = req.body.app_key;
 
-    if (app.key == app_key) {
+    if (config.key == app_key) {
       db.admin.create(data)
         .then((result) => {
           req.session.info = {

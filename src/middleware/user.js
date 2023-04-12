@@ -1,6 +1,10 @@
 var toUserLogin = (req, res, next) => {
    
  const {user} = req.session;
+ 	/*req.session.flush = req.session.info;
+ 	if(req.session.flush)
+ 		req.session.info = null;*/
+ 	
 
     if(req.session.history == undefined)
      	req.session.history  = [req.url];

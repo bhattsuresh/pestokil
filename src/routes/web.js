@@ -2,6 +2,8 @@ const express = require('express');
 var router = express.Router();
 const app = require('../config/setting');
 
+const MasterController = require('../controllers/MasterController');
+
 const {toUserLogin,toUserHome} = require('../middleware/user');
 
 
@@ -26,53 +28,31 @@ router.post('/register',toUserHome,require('../controllers/UserController').sign
 
 
 // master route
-router.get('/master/new-exporter',toUserLogin,(req,res)=>{
-	res.render('master/new-exporter');
-});
+router.get('/master/new-exporter',toUserLogin,MasterController.newExporter);
+router.post('/master/new-exporter',toUserLogin,MasterController.addExporter);
+router.get('/master/all-exporter',toUserLogin,MasterController.getExporter);
+router.get('/master/exporter/active/:id/:val',toUserLogin,MasterController.activeExporter);
 
 
-router.post('/master/new-exporter',toUserLogin,require('../controllers/MasterController').addExporter);
-router.get('/exporter/active/:id/:val',toUserLogin,require('../controllers/MasterController').activeExporter);
+router.get('/master/new-consignee',toUserLogin,MasterController.newConsignee);
+router.post('/master/new-consignee',toUserLogin,MasterController.addConsignee);
+router.get('/master/all-consignee',toUserLogin,MasterController.getConsignee);
+router.get('/master/consignee/active/:id/:val',toUserLogin,MasterController.activeConsignee);
 
 
-router.get('/master/all-exporter',toUserLogin,require('../controllers/MasterController').getExporter);
-
-router.get('/master/new-consignee',toUserLogin,(req,res)=>{
-	res.render('master/new-consignee');
-});
-
-
-router.post('/master/new-consignee',toUserLogin,(req,res)=>{
-    var data = req.body;
-    //var companyName = data.name
-    res.json(data);
-    //res.render('master/new-exporter');
-});
-
-router.get('/master/all-consignee',toUserLogin,(req,res)=>{
-    res.render('master/all-consignee');
-});
-
-router.get('/master/new-billing-party',toUserLogin,(req,res)=>{
-	res.render('master/new-billing-party');
-});
+router.get('/master/new-billing-party',toUserLogin,MasterController.newBillingParty);
+router.post('/master/new-billing-party',toUserLogin,MasterController.addBillingParty);
+router.get('/master/all-billing-party',toUserLogin,MasterController.getBillingParty);
+router.get('/master/billing-party/active/:id/:val',toUserLogin,MasterController.activeBillingParty);
 
 
-router.post('/master/new-billing-party',toUserLogin,(req,res)=>{
-    var data = req.body;
-    //var companyName = data.name
-    res.json(data);
-    //res.render('master/new-exporter');
-});
 
-router.get('/master/all-billing-party',toUserLogin,(req,res)=>{
-	res.render('master/all-billing-party');
-});
+
 
 router.get('/dashboard',toUserLogin,require('../controllers/MainController').dashboard);
 
 
-router.get('/certificate',toUserLogin,(req,res)=>{
+router.get('/mbr-certificate',toUserLogin,(req,res)=>{
     var data = {};
     data.certificateDate = '20/11/2022';
     data.fumigationOperator = "Suresh Bhatt";
