@@ -42,8 +42,10 @@ var components = [
 
 app.uniqueId = components.join("");
 
-function greetings(){
+app.greetings = ()=>{
+    d = new Date()
     var h=d.getHours()
+     
     if (h>=4 && h<12)
         return 'Good Morning';
     else if (h>=12 && h<17)
@@ -54,7 +56,7 @@ function greetings(){
         return 'Good Night';
 }
 
-app.greeting = greetings()
+app.greeting = app.greetings()
 
 app.razorpay_key = process.env.RAZORPAY_KEY;
 app.razorpay_secret = process.env.RAZORPAY_SECRET;

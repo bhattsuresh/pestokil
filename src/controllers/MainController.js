@@ -16,6 +16,8 @@ class MainController{
      }
 
    dashboard(req,res){
+      req.app.greeting = greetings();
+      console.log(greetings());
       res.render('dashboard')
      }
 

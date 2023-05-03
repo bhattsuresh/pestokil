@@ -64,6 +64,20 @@ router.get('/mbr-certificate',toUserLogin,(req,res)=>{
 
 
 
+router.get('/certificate/alp',toUserLogin,(req,res)=>{
+    res.render('certificate/alp');
+});
+
+
+
+router.get('/certificate/aus',toUserLogin,(req,res)=>{
+    res.render('certificate/aus');
+});
+
+
+router.get('/branches',toUserLogin,require('../controllers/BranchController').branches);
+router.get('/branch',toUserLogin,require('../controllers/BranchController').branch);
+
 router.get('/users',toUserLogin,require('../controllers/UserController').users);
 router.get('/users/active/:id/:val',toUserLogin,require('../controllers/UserController').userActive);
 

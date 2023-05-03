@@ -10,3 +10,7 @@ npx sequelize-cli model:create --name MyUser --attributes first_name:string,last
 
 
  npx sequelize-cli model:create --name billing --attributes company:string,name:string,address:text,city:string,state:string,country:string,pincode:integer,mobile:string,phone:string,email:string,gstin:string,allowCertificate:string,active:integer
+
+
+
+npx sequelize-cli model:create --name branch --attributes name:string,address:string,code:string,invoice:string,active:integer

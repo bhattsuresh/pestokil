@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 require('dotenv').config();
+const config = require('./src/config/setting');
 const session = require('express-session');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 let con = null;
@@ -19,6 +20,7 @@ const {
 const IN_PROD = NODE_ENV === 'production'
 
 
+ 
 var sessionStore = new SequelizeStore({
       db: require('./src/models').sequelize,
       cleanup: true
@@ -38,7 +40,10 @@ app.use(session({
 }));
 
 app.use((req,res,next)=>{
+  app.config.greeting=config.greetings()
+
   app.locals.session = req.session;
+
   next();
 });
 
@@ -59,11 +64,12 @@ app.use((req,res)=>{
   res.render('404');
 });
 
-const config = require('./src/config/setting');
+
 //for app object global in client we can use config.[property] to access all config
 app.locals.config = config;
 // for server side get config obj in req.app.config
 app.config = config;
+
 
 hbs.registerHelper('include', function (view,args,options) {
   

@@ -12,6 +12,8 @@
   <title></title>
 </head>
 <body>
+
+  <div id="print">
  <h2><center>FUMIGATION CERTIFICATE</center> </h2>
  <hr style = "border-top: 1px solid black;">
  <div>
@@ -129,14 +131,52 @@ spaced every 200mm in height</td><td><b>No</b> </td></tr>
   Signature:
  </td> <td width="50% "> add stamp here</td></tr>
 </table>
-<p>*I declare that these details are true & correct and the fumigation has been carried out in accordance with the NSPM-12 standards.</p>
-<p>
-*P.S: No financial liability attaches to certifying company or its Representative With respect of this certificate.</p>
-<p>*Consignment details as declared by shipper.</p>
 
+<p>*I declare that these details are true & correct and the fumigation has been carried out in accordance with the NSPM-12 standards. <br>
+
+*P.S: No financial liability attaches to certifying company or its Representative With respect of this certificate.<br>
+*Consignment details as declared by shipper.
+
+<style type="text/css">
+
+   
+  @media print {
+
+
+  body {
+    font-size: 9px;
+    -webkit-transform: scale(0.85);  /* Saf3.1+, Chrome */
+    -moz-transform: scale(0.85);  /* FF3.5+ */
+    -ms-transform: scale(0.85);  /* IE9 */
+    -o-transform: scale(0.85);  /* Opera 10.5+ */
+    transform: scale(0.85);
+    margin: 0.5in;
+    transform-origin: 0 0; 
+
+  }
+  table tr td {
+    padding: 5px;
+  }
+}
+</style>
+  
+</div>
+ <center><button class="btn btn-success" onclick="printDiv('print')">Print </button></center>
+
+<script type="text/javascript">
   
 
+  function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
 
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 </body>
 </html>
 </div>
