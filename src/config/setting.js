@@ -61,6 +61,18 @@ app.greeting = app.greetings()
 app.razorpay_key = process.env.RAZORPAY_KEY;
 app.razorpay_secret = process.env.RAZORPAY_SECRET;
 
+
+app.generateCertificate = (str)=>{
+    var c = str.match(/\d+$/)[0];
+    var c1=c;
+    c++;
+    str = str.replace(c1,c)
+    console.log('str',str);
+    return str;
+
+}
+
+
 //for app object global in server
 global.config = app;
 

@@ -1,6 +1,19 @@
 const db = require('../models');
 
-class BranchController{
+class CertificateController{
+
+	generateCertificate(req,res){
+		let branchCode = req.session.user.branchCode;
+       db.branch.findOne({where: {code:branchCode}})
+       .then(result=>{
+       	var {certificate} = result;
+       	let cert = req.app.config.generateCertificate(certificate);
+       	res.render('certificate/mbr-create',{certificate:cert});
+       }).catch(err=>{
+		   		return res.json(err)
+		   });
+
+	}
 
 	branchAdd(req,res){
 	   let data = req.body;
@@ -48,4 +61,4 @@ class BranchController{
 	  
  
 }
-module.exports = new BranchController;
+module.exports = new CertificateController;

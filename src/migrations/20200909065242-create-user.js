@@ -16,6 +16,10 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
+      branchCode: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       username: {
         type: Sequelize.STRING,
         unique: true,

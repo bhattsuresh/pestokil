@@ -16,13 +16,24 @@ module.exports = {
         type: Sequelize.STRING
       },
       code: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false
       },
       invoice: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: true
+      },
+      certificate: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: true
       },
       active: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(1),
+        allowNull: true,
+        defaultValue: "0"
       },
       createdAt: {
         allowNull: false,

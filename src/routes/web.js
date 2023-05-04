@@ -77,10 +77,14 @@ router.get('/certificate/aus',toUserLogin,(req,res)=>{
 
 router.get('/branches',toUserLogin,require('../controllers/BranchController').branches);
 router.get('/branch',toUserLogin,require('../controllers/BranchController').branch);
+router.post('/branch',toUserLogin,require('../controllers/BranchController').branchAdd);
+router.get('/branch/active/:id/:val',toUserLogin,require('../controllers/BranchController').branchActive);
+
 
 router.get('/users',toUserLogin,require('../controllers/UserController').users);
 router.get('/users/active/:id/:val',toUserLogin,require('../controllers/UserController').userActive);
 
+router.get('/certificate-no',require('../controllers/CertificateController').generateCertificate);
 router.get('/logout',require('../controllers/UserController').logout);
 
 
