@@ -8,7 +8,8 @@ class CertificateController{
        .then(result=>{
        	var {certificate} = result;
        	let cert = req.app.config.generateCertificate(certificate);
-       	res.render('certificate/mbr-create',{certificate:cert});
+       	let dateOfIssue=req.app.config.getDate();
+       	res.render('certificate/mbr-create',{certificate:cert,dateOfIssue});
        }).catch(err=>{
 		   		return res.json(err)
 		   });

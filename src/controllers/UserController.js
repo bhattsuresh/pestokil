@@ -25,7 +25,7 @@ class UserController{
 			   });
 	}
 
-	 users(req, res) {
+	users(req, res) {
 
     const { Op } = require("sequelize");
    /* var year = req.params.year;
@@ -41,10 +41,29 @@ class UserController{
     db.user.findAll({order: [['createdAt', 'DESC']]})
       .then((users) => {
       	 
-         res.render("users", {users});
+         res.render("user/users", {users});
       })
       .catch((err) => console.log(err));
   }
+
+  async user(req,res){
+    let branches = await db.branch.findAll();
+  	res.render("user/new-user",{branches})
+  }
+
+
+	userAdd(req,res){
+	   let data = req.body;
+        data.active = 1;
+		db.user.create(data)
+		   .then((result)=>{
+			   req.session.info = {err:0,msg:'User created successful.'}; 
+		   	   res.redirect('/users');
+		   })
+		   .catch(err=>{
+		   		return res.json(err)
+		   });
+	}
 
 
   userActive(req,res){

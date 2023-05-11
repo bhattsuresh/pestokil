@@ -39,6 +39,18 @@ var components = [
     date.getSeconds(),
     date.getMilliseconds()
 ];
+app.getDate = ()=>{
+    let date = new Date()
+    let d = date.getDate()
+    let m = date.getMonth()
+    let y = date.getFullYear()
+
+    d = d < 10 ? '0'+d:d;
+    m = m+1
+    m = m < 10 ? `0${m}`:m;
+
+    return `${y}-${m}-${d}`;
+}
 
 app.uniqueId = components.join("");
 

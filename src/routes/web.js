@@ -82,6 +82,8 @@ router.get('/branch/active/:id/:val',toUserLogin,require('../controllers/BranchC
 
 
 router.get('/users',toUserLogin,require('../controllers/UserController').users);
+router.get('/user',toUserLogin,require('../controllers/UserController').user);
+router.post('/user',toUserLogin,require('../controllers/UserController').userAdd);
 router.get('/users/active/:id/:val',toUserLogin,require('../controllers/UserController').userActive);
 
 router.get('/certificate-no',require('../controllers/CertificateController').generateCertificate);
