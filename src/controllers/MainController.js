@@ -15,9 +15,27 @@ class MainController{
       res.render('index',{data:{name:"SB",age:56}})
      }
 
-   dashboard(req,res){
-      res.render('dashboard')
-     }
+    async dashboard(req,res){
+      let data = {mbr:5,alp:3,aus:2}
+      data.expoters = await db.exporter.count();
+      data.consignee = await db.consignee.count();
+      data.billings = await db.billing.count();
+      data.branch = await db.branch.count();
+      data.user = await db.user.count();
+      
+      res.render('dashboard',{...data})
+    }
+
+    async dashboardApi(req,res){
+      let data = {mbr:5,alp:3,aus:2}
+      data.expoters = await db.exporter.count();
+      data.consignee = await db.consignee.count();
+      data.billings = await db.billing.count();
+      data.branch = await db.branch.count();
+      data.user = await db.user.count();
+      
+      res.status(200).send({success:true,message:"dashboard data",data})
+    }
 
     about(req,res){
       res.render('about')

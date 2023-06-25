@@ -306,6 +306,7 @@ $(function() {
   }
 
   if ($("#doughnutChart").length) {
+    
     var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
     var doughnutChart = new Chart(doughnutChartCanvas, {
       type: 'doughnut',

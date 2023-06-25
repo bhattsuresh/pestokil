@@ -551,34 +551,35 @@
       document.getElementById('marketing-overview-legend').innerHTML = marketingOverviewDark.generateLegend();
     }
     if ($("#doughnutChart").length) {
+      let data = $("#doughnutChart").data('values').split(',');
+      let labels = $("#doughnutChart").data('labels').split(',');
       var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
       var doughnutPieData = {
         datasets: [{
-          data: [40, 20, 30, 10],
+          data: data,
           backgroundColor: [
             "#1F3BB3",
             "#FDD0C7",
-            "#52CDFF",
-            "#81DADA"
+            "#ff6361",
+            "#81DADA",
+            "#003f5c",
+            "#bc5090"
           ],
           borderColor: [
             "#1F3BB3",
             "#FDD0C7",
-            "#52CDFF",
-            "#81DADA"
+            "#ff6361",
+            "#81DADA",
+            "#003f5c",
+            "#bc5090"
           ],
         }],
   
         // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: [
-          'Total',
-          'Net',
-          'Gross',
-          'AVG',
-        ]
+        labels: labels
       };
       var doughnutPieOptions = {
-        cutoutPercentage: 50,
+        cutoutPercentage:50,
         animationEasing: "easeOutBounce",
         animateRotate: true,
         animateScale: false,
@@ -588,7 +589,7 @@
         legend: false,
         legendCallback: function (chart) {
           var text = [];
-          text.push('<div class="chartjs-legend"><ul class="justify-content-center">');
+          text.push('<div class="chartjs-legend"><ul class="justify-content-center" style="display:block">');
           for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
             text.push('<li><span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">');
             text.push('</span>');
@@ -634,14 +635,18 @@
       });
       document.getElementById('doughnut-chart-legend').innerHTML = doughnutChart.generateLegend();
     }
+
+
     if ($("#leaveReport").length) {
+      let data = $("#leaveReport").data('values').split(',');
+      let labels = $("#leaveReport").data('labels').split(',');
       var leaveReportChart = document.getElementById("leaveReport").getContext('2d');
       var leaveReportData = {
-          labels: ["Jan","Feb", "Mar", "Apr", "May"],
+          labels: labels,
           datasets: [{
-              label: 'Last week',
-              data: [18, 25, 39, 11, 24],
-              backgroundColor: "#52CDFF",
+              label: 'Total:',
+              data: data,
+              backgroundColor: ['#dd5358','#fe862f','#9f3c68','#c14463','#f26946','#7a3666'],
               borderColor: [
                   '#52CDFF',
               ],

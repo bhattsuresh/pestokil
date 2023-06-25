@@ -1,71 +1,37 @@
-<script type="text/javascript" src="/js/qrcode.min.js"></script>
 <style>
-    *{
-        font-size: 11px;
-        font-family: Arial;
-    }
-    .page-container{
-        height: 29.7cm;
-        width:21cm;
-        background-image: url('/images/certificate/1.jpg'); 
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-position: top 0px bottom 0px left 0px right 0px;
-    }
-    .page{
-        padding-top:1.15in ;
-        padding-left: 0.25in;
-        padding-right: 0.25in;
-        padding-bottom: 0.66in;
-    }
-
-
-
-    body{margin: 0; padding: 0;}
-
- 
-    .page table {
-            width: 100%;
-
-            
-        }
-
-
-
     @media print {
-       
         * {
+
             font-size: 11px;
             font-family: Arial;
+            /*-webkit-transform: scale(0.85);  
+      -moz-transform: scale(0.85); 
+      -ms-transform: scale(0.85); 
+      -o-transform: scale(0.85);  
+      transform: scale(0.85);
+      margin: 0.5in;
+      transform-origin: 0 0; */
+
         }
 
-
-
-        .page-container{
-            width:21cm;
-            height: 29.7cm;
-            background-image: url('/images/certificate/1.jpg'); 
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-position: top 0px bottom 0px left 0px right 0px;
-            
+        #printTable {
+            margin-top: 1in;
+            margin-left: 0.5in;
         }
 
-        .page{
-            padding-top:1.15in ;
-            padding-left: 0.25in;
-            padding-right: 0.25in;
-            padding-bottom: 0.66in;
+        .heading {
+            font-size: 16px;
         }
-       
 
     }
 
-   
+    .heading {
+        font-size: 16px;
+        font-family: Arial;
+
+    }
 
     .heading span {
-        font-size: 16px!important;
-        font-family: Arial;
         position: relative;
     }
 
@@ -79,79 +45,52 @@
 
     .table.border {
         border-collapse: collapse;
-        border-right: solid .25pt black;
-        border-bottom: solid .25pt black;
+        border-right: 1px solid gray;
+        border-bottom: 1px solid gray;
     }
 
     .table.border td {
-        border-top: solid .25pt black;
-        border-left: solid .25pt black;
-        padding: 3px;
+        border-top: 1px solid gray;
+        border-left: 1px solid gray;
     }
-
     .border-up{
         position: relative;
     }
     .border-up::before {
-        width: 100%;
-        position: absolute;
-        left: 0;
-        text-align: center;
-        content: attr(name);
-        top: -20px;
-    }
-
-    .border-up::after {
         border-top: 1px solid #2196F3;
         width: 100%;
         position: absolute;
         content: "";
         top: -3px;
-        left: 0;
     }
-
-   
-    @media print and (color) {
-   * {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-   }
-}
-ul,p{
-    margin:0px !important;
-}
 </style>
-
-<body class="body">
-<section class="page-container">
-<div class="page">
-<table align="center" id="printTable" >
+<table align="center" id="printTable">
     <tbody>
         <tr>
-            <td  colspan="2" width="699" style="text-align: center;">
+            <td colspan="11" width="699" style="text-align: center;">
                 <p class="heading"><span>Fumigation Certificate</span></p>
             </td>
         </tr>
         <tr>
-            <td  width="350">
-                <p>Dte. PPQ&amp;S Regd. No. <strong> 832/MB</strong></p>
+            <td colspan="6" width="350">
+                <p>Dte. PPQ&amp;S Regd. No. <strong>832/MB</strong></p>
 
-                <p>Date:<strong> 26/11/2021</strong></p>
+                <p>Date:<strong>26/11/2021</strong></p>
             </td>
-            <td  width="350" style="text-align:right;">
-                <p>Treatment Certificate: <strong> PI01GN230001</strong></p>
+            <td colspan="6" width="350" style="text-align:right;">
+                <p>Treatment Certificate: <strong>PI01GN230001</strong></p>
 
-                <p>Date of Issue:<strong> 08/06/2023</strong></p>
+                <p>Date of Issue:<strong>08/06/2023</strong></p>
             </td>
 
         </tr>
         <tr>
             <td colspan="11">
-                <table class="table border" cellspacing="1">
+                <table class="table border">
                     <tbody>
                         <tr>
                             <td colspan="12" width="703">
-                                <p style="text-align: justify;"><em>This is to certify that the goods described below were treated in accordance with
+                                <p><em>This is to certify that the goods described below were treated in accordance with
                                         the</em>
                                     <em>fumigation treatment requirements of importing country. </em>USA<em> and
                                         declared that</em>
@@ -163,7 +102,9 @@ ul,p{
                                         the fumigant,
                                         prior to fumigation.</em>
                                 </p>
-                                <p style="text-align: center;"><em>The Certificate is valid for the consignments shipped within 21 days from the date of completion of fumigation.</em>
+                                <p><em>The Certificate is valid for the consignments shipped within 21 days from the
+                                        date of</em>
+                                    <em>completion of fumigation.</em>
                                 </p>
                             </td>
                         </tr>
@@ -173,15 +114,15 @@ ul,p{
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="6" width="50%" style="vertical-align: top;">
+                            <td colspan="6" width="351">
                                 <p><strong>1. Name &amp; address of exporter / consignor:</strong></p>
                                 <p><strong>RATNARAJ FOODS</strong></p>
                                 <p>SURVEY NO. 258, BLOCK NO. 515, VILLAGR- RAKANPUR, TAL. KALOL, DIST. GANDHINAGAR,
                                     AHMEDABAD, GUJARAT,
                                     382721.</p>
                             </td>
-                            <td colspan="6" width="50%">
-                                <p><strong>2. Declared name &amp; address of consignee:</strong></p>
+                            <td colspan="6" width="351">
+                                <p><strong>2.Declared name &amp; address of consignee:</strong></p>
                                 <p><strong>ZAMIN DARYATARABAR KIYAN</strong></p>
                                 <p>INTERNATIONAL TRANSPORT CO. LTD. THREEWAY JAHANBAR, QHARMAN STREET, ROYAL 1 COMPLEX,
                                     BANDAR ABBAS,
@@ -202,7 +143,7 @@ ul,p{
                         <tr>
                             <td colspan="6" width="351">
                                 <p><strong>5. Quantity declared:</strong> &nbsp; No. of Packages:&nbsp; <strong>1600 BAGS</strong> //&nbsp;</p>
-                                <p>&nbsp;Net Weight: <strong>15000.000Kgs</strong> &nbsp; &nbsp;// Gross. Weight: <strong>15600.000Kgs</strong>
+                                <p>&nbsp;Net Weight: <strong>15000.000Kgs</strong> &nbsp; &nbsp;// &nbsp;&nbsp;Gross. Weight: <strong>15600.000Kgs</strong>
                                 </p>
                             </td>
                             <td colspan="6" width="351">
@@ -216,7 +157,7 @@ ul,p{
                                 <p>MUNDRA, INDIA</p>
                             </td>
                             <td colspan="4" width="176">
-                                <p><strong>8. Country of destination</strong></p>
+                                <p><strong>8.&nbsp; Country of destination</strong></p>
                                 <p>IRAN</p>
                             </td>
                             <td colspan="2" width="176">
@@ -224,7 +165,7 @@ ul,p{
                                 <p>N/A</p>
                             </td>
                             <td colspan="4" width="176">
-                                <p><strong>10. Port of entry:</strong></p>
+                                <p><strong>10.&nbsp;&nbsp; Port of entry:</strong></p>
                                 <p>BANDAR ABBAS, IRRAN</p>
                             </td>
                         </tr>
@@ -239,17 +180,17 @@ ul,p{
                                 <p>METHYL BROMIDE (CH<sub>3</sub>BR)</p>
                             </td>
                             <td colspan="4" width="234">
-                                <p><strong>12. Date of Fumigation:</strong></p>
+                                <p><strong>12.&nbsp; Date of Fumigation:</strong></p>
                                 <p>06/06/2023</p>
                             </td>
                             <td colspan="5" width="234">
-                                <p><strong>13. Place of Fumigation:</strong></p>
+                                <p><strong>13.&nbsp; Place of Fumigation:</strong></p>
                                 <p>AHMEDABAD, INDIA</p>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3" width="234">
-                                <p><strong>14. Dose of Fumigant:</strong></p>
+                                <p><strong>14.&nbsp; Dose of Fumigant:</strong></p>
                                 <p>80 GRAMS/CUM</p>
                             </td>
                             <td colspan="4" width="234">
@@ -257,75 +198,38 @@ ul,p{
                                 <p>48 hours</p>
                             </td>
                             <td colspan="5" width="234">
-                                <p><strong>16. Minimum air temperature:</strong></p>
+                                <p><strong>16.&nbsp; Minimum air temperature:</strong></p>
                                 <p>28 <sup>O</sup>C</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="6" width="352" >
-                                <table style="width: 100%;" style="border:0; border-collapse: collapse;">
-                                    <tbody style="padding: 0;">
-                                        <tr style="padding: 0;">
-                                            <td colspan="5" width="292" style="padding: 0; border:none;">
-                                                <p><strong>17.</strong> Fumigation Performed under gastight sheets</p>
-                                            </td>
-                                            <td colspan="1" width="60" style="border:none;">
-                                                <p>: <strong>Yes</strong></p>
-                                            </td>
-                                            
-                                        </tr>
-                                </table>
+                            <td colspan="5">
+                                <p><strong>17.</strong>&nbsp;&nbsp; Fumigation Performed under gastight sheets</p>
                             </td>
-                            <td colspan="6" width="352" >
-                                <table style="width: 100%;" style="border:0; border-collapse: collapse;">
-                                    <tbody style="padding: 0;">
-                                        <tr style="padding: 0;">
-                                            
-                                            <td colspan="5" width="292" style="padding: 0; border:none">
-                                                <p><strong>18.</strong> Container has 200mm free air space at top of container</p>
-                                            </td>
-                                            <td colspan="1" width="60" style="border:none;">
-                                                <p> &nbsp; &nbsp; : <strong>NA</strong></p>
-                                            </td>
-                                        </tr>
-                                </table>
-                        
+                            <td colspan="1" width="60px" style="border-left:none;">
+                                <p>: <strong>Yes</strong></p>
+                            </td>
+                            <td colspan="5">
+                                <p><strong>18.</strong>&nbsp;&nbsp; Container has 200mm free air space at top of container</p>
+                            </td>
+                            <td colspan="1" width="60px" style="border-left:none;">
+                                <p> &nbsp; &nbsp; : <strong>NA</strong></p>
                             </td>
                         </tr>
-
                         <tr>
-                            <td colspan="6" width="352" >
-                                <table style="width: 100%;" style="border:0; border-collapse: collapse;">
-                                    <tbody style="padding: 0;">
-                                        <tr style="padding: 0;">
-                                            <td colspan="5" width="292" style="padding: 0; border:none;">
-                                                <p><strong>19.</strong> Container pressure test conducted</p>
-                                            </td>
-                                            <td colspan="1" width="60" style="border:none;">
-                                                <p>: <strong>No</strong></p>
-                                            </td>
-                                            
-                                        </tr>
-                                </table>
+                            <td colspan="5">
+                                <p><strong>19.</strong>&nbsp;&nbsp; Container pressure test conducted</p>
                             </td>
-                            <td colspan="6" width="352" >
-                                <table style="width: 100%;" style="border:0; border-collapse: collapse;">
-                                    <tbody style="padding: 0;">
-                                        <tr style="padding: 0;">
-                                            
-                                            <td colspan="5" width="292" style="padding: 0; border:none">
-                                                <p><strong>20.</strong> Enclosure has been ventilated to below 5ppm v/v Methyl Bromide</p>
-                                            </td>
-                                            <td colspan="1" width="60" style="border:none;">
-                                                <p> &nbsp; &nbsp; : <strong>Yes</strong></p>
-                                            </td>
-                                        </tr>
-                                </table>
-                        
+                            <td colspan="1" width="60px" style="border-left:none;">
+                                <p>:&nbsp; <strong>No</strong></p>
+                            </td>
+                            <td colspan="5">
+                                <p><strong>20.</strong>&nbsp;&nbsp; Enclosure has been ventilated to below 5ppm v/v Methyl Bromide</p>
+                            </td>
+                            <td colspan="1" width="60px" style="border-left:none;">
+                                <p> &nbsp; &nbsp; : <strong>Yes</strong></p>
                             </td>
                         </tr>
-                    
-                    
                         <tr>
                             <td colspan="12" width="703">
                                 <p><strong>WRAPPING &amp; TIMBER</strong></p>
@@ -333,21 +237,21 @@ ul,p{
                         </tr>
                         <tr>
                             <td colspan="11" width="641">
-                                <p><strong>21.</strong> Has the commodity been fumigated prior to lacquering, varnishing,
+                                <p><strong>21.</strong>&nbsp;&nbsp; Has the commodity been fumigated prior to lacquering, varnishing,
                                     painting or
                                     wrapping</p>
-                                <p><strong>22.</strong> Has plastic wrapping been used in the consignment?</p>
+                                <p><strong>22.</strong>&nbsp;&nbsp; Has plastic wrapping been used in the consignment?</p>
                                 <ul>
                                     <li> If yes, has the Consignment been fumigated prior to wrapping?</li>
                                     <li> Or has the plastic wrapping been slashed, opened or perforated in accordance
                                         with the wrapping and perforation standard?</li>
                                 </ul>
-                                <p><strong>23.</strong> Is the timber in this consignment less than 200mm thick in one dimension
+                                <p><strong>23.</strong>&nbsp; Is the timber in this consignment less than 200mm thick in one dimension
                                     and correctly
                                     every 200mm. in height?</p>
                             </td>
                             <td colspan="1" width="90px">
-                                <p><strong>No</strong></p>
+                                <p> &nbsp; </p>
                                 <p><strong>No</strong></p>
                                 <ul style="list-style: none; padding:0;">
                                     <li><strong> NA</strong></li>
@@ -358,24 +262,27 @@ ul,p{
                         </tr>
                         <tr>
                             <td colspan="12" width="703">
-                                <p><strong>24. Additional declaration:</strong></p>
+                                <p><strong>24.&nbsp;&nbsp; Additional declaration:</strong></p>
                                 <p>&nbsp;</p>
                             </td>
                         </tr>
-                        <tr> 
-                            <td colspan="12" width="703" style="border-top:none; vertical-align: bottom;">
+                        <tr>
+                            <td width="117">
+                                <img src="images/qr.png" style="width:100%;" />
+                            </td>
+                            <td colspan="11" width="586" style="border-top:none; vertical-align: bottom;">
                                 <table style="width: 100%;" >
                                     <tbody>
                                         <tr>
-                                            <td width="120" style="border: .25pt solid black;"><div id="qrcode" style="height: 120px; width: 120px;"></div></td>
                                             <td style="border: none; vertical-align: bottom;" >
-                                                <p style="padding-left: 5px;"> <strong>DPPQS Accreditation No.: IN832011121</strong></p>
+                                                <p style="padding-left: 35px;"> <strong>DPPQS Accreditation No.: IN832011121</strong></p>
                                             </td>
-                                            <td style="border: none; vertical-align: bottom;text-align:right">
-                                                
-                                                <p style="padding-right: 5px; ">
-                                                   
-                                                     <span name="PAWAN KUMAR" class="border-up">Name &amp; Signature of Accredited Fumigation Operator</span>
+                                            <td style="border: none;">
+                                                <p style="text-align: center;">
+                                                <strong> PAWAN KUMAR</strong>
+                                                </p>
+                                                <p style="padding-right: 35px; text-align: right;">
+                                                     <span class="border-up">Name &amp; Signature of Accredited Fumigation Operator</span>
                                                 </p>
                                             </td>
                                         
@@ -392,7 +299,7 @@ ul,p{
                                     accordance with the <strong>NSPM-12</strong> standards.</p>
                                 <p>*No financial liability attached to certifying company / its representative with
                                     respect of this
-                                    certificate. *Consignment details are as declared by the
+                                    certificate.&nbsp;&nbsp;&nbsp;&nbsp; *Consignment details are as declared by the
                                     shipper.</p>
                             </td>
                         </tr>
@@ -402,16 +309,3 @@ ul,p{
         </tr>
     </tbody>
 </table>
-</div>
-</section>
-<script>
-    var qrcode = new QRCode("qrcode", {
-    text: `{{config.url}}/certificate/mbr/download`,
-    width: 120,
-    height: 120,
-    colorDark : "#000",
-    colorLight : "#fff",
-    correctLevel : QRCode.CorrectLevel.H
-});
-</script>
-</body>

@@ -6,6 +6,10 @@ const config = require('./src/config/setting');
 const session = require('express-session');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 let con = null;
+var cors = require('cors')
+
+app.use(cors());
+
 const hbs = require('hbs')
 
 const TWO_HOURS = 1000 * 60 ;
@@ -59,6 +63,7 @@ app.engine('html', hbs.__express)
 
 app.use('/',require('./src/routes/web'));
 
+app.use('/api',require('./src/routes/api'));
 
 app.use((req,res)=>{
   res.render('404');

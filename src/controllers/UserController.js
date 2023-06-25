@@ -52,10 +52,13 @@ class UserController{
   }
 
 
-	userAdd(req,res){
+	async userAdd(req,res){
 	   let data = req.body;
-        data.active = 1;
-		db.user.create(data)
+
+	   if(data.id == ""){
+	   		 data.active = 1;
+	   		 delete data.id;
+			db.user.create(data)
 		   .then((result)=>{
 			   req.session.info = {err:0,msg:'User created successful.'}; 
 		   	   res.redirect('/users');
@@ -63,7 +66,40 @@ class UserController{
 		   .catch(err=>{
 		   		return res.json(err)
 		   });
+
+	   }else{
+		var where = {where:{id:data.id}};
+
+		var user = await db.user.findOne(where);
+
+		   user.name = data.name;
+		   user.email = data.email;
+		   user.username = data.username;
+		   user.branchCode = data.branchCode;
+		   if(data.checkPass){
+		   	user.password = data.password
+		   }
+
+		   await user.save();	
+
+		   req.session.info = {err:0,msg:'User updated successful.'}; 
+		   	   res.redirect('/users');
+		}
+
+
+       
 	}
+
+	async userEdit(req,res){
+		let id = req.params.id;
+		var where = {where:{id:id}};
+		var user = await db.user.findOne(where);
+		
+		 let branches = await db.branch.findAll();
+  		res.render("user/new-user",{branches,user})
+
+	}
+	
 
 
   userActive(req,res){
@@ -83,14 +119,19 @@ class UserController{
 
 
 	login(req,res){
-		req.session.info = {};
 		var username = req.body.username,
             password = req.body.password;
+    
+		const jwt = require('jsonwebtoken');
 			
 		db.user.findOne({ where: { username:username } }).then(function (user) {
             if(!user){
-				req.session.info = {err:1,msg:"User Not found!"};
-						res.render('login');
+				//req.session.info = {err:1,msg:"User Not found!"};
+				res.status(200).send({
+					success:false,
+					message:"User Not found!",
+					data:null
+				});
 			}
 			else{
 				
@@ -101,34 +142,45 @@ class UserController{
 						
 
 						if(user.active){
-							req.session.user = user.dataValues;
+							//req.session.user = user.dataValues;
 							//req.session.user.address = JSON.parse(req.session.user.address);
-							req.session.user.isLogged=true;
-							req.session.info = {err:0,msg:"Login Success"};
-							let url = req.session.history == undefined ? '/':req.session.history.pop();
-							/*db.usercategory.findAll({
-								where:{userId:user.id},
-								include: [
-						        {model:db.category,attributes:['name']}
-						        ]}).then(r=>{
+							//req.session.user.isLogged=true;
+							//req.session.info = {err:0,msg:"Login Success"};
+							//let url = req.session.history == undefined ? '/':req.session.history.pop();
+							const token = jwt.sign(
+								{
+									user:user.dataValues
+								},
+								process.env.APP_KEY,
+								{ expiresIn: 60*60 } //one hour
+								
+								// { expiresIn: "24h" }
+								// { expiresIn: 60*60*24 }
+							  );
 
-								req.session.user.category = r;
-								res.redirect('users');
-								//res.json({err:0,msg:"Login successful! Please wait...",url});
-							}).catch(e=>{
-								res.json({err:1,msg:"Account not active yet...",url});
-							})*/
-						    	
-						    	res.redirect('dashboard');						
+							res.status(200).send({success:true,
+								message:"Login Success",
+							data:user.dataValues,
+							token:token,
+							type:"Baerer"
+						})
 							
 							
 						}else{
 							req.session.info = {err:1,msg:"Account not active yet."};
-							res.render('login');
+							res.status(200).send({
+								success:false,
+								message:"Account not active yet.",
+								data:null
+							});
 						}
 					}else{
 						req.session.info = {err:1,msg:"Password Incorrect"};
-						res.render('login');
+						res.status(200).send({
+							success:false,
+							message:"Password Incorrect.",
+							data:null
+						});
 					}
 					});
 					
@@ -138,7 +190,11 @@ class UserController{
 		}).catch(e=>{
 			
 			req.session.info = {err:1,msg:"Sorry Login error"};
-						res.render('login');
+			res.status(200).send({
+				success:false,
+				message:"Sorry Login error",
+				data:e
+			});
 		})
 		
 	}

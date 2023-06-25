@@ -8,8 +8,11 @@ const {toUserLogin,toUserHome} = require('../middleware/user');
 
 
 
-router.get('/',require('../controllers/MainController').index);
+// router.get('/',require('../controllers/MainController').index);
 
+router.get('/',toUserHome,(req,res)=>{
+    res.redirect('login');
+});
 
 router.get('/login',toUserHome,(req,res)=>{
     res.render('login');
@@ -21,6 +24,18 @@ router.get('/register',toUserHome, (req,res)=>{
 
 router.get('/forgot-password',(req,res)=>{
 	res.send('Coming soon');
+});
+
+router.get('/mbr-new',toUserLogin, (req,res)=>{
+    res.render('certificate/mbr-new');
+});
+
+router.get('/mbr', (req,res)=>{
+    res.render('certificate/mbr');
+});
+
+router.get('/tst', (req,res)=>{
+    res.render('certificate/tst');
 });
 
 router.post('/login',toUserHome,require('../controllers/UserController').login);
@@ -74,9 +89,28 @@ router.get('/certificate/aus',toUserLogin,(req,res)=>{
     res.render('certificate/aus');
 });
 
+router.get('/certificate/mbr/download',(req,res)=>{
+    var html_to_pdf = require('html-pdf-node');
+
+let options = { format: 'A4' };
+// Example of options with args //
+// let options = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox'] };
+
+//let file = { content: "<h1>Welcome to html-pdf-node</h1>" };
+// or //
+let file = { url: "http://localhost:5000/mbr" };
+html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
+  console.log("PDF Buffer:-", pdfBuffer);
+  res.contentType("application/pdf");
+  //res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
+  res.send(pdfBuffer);
+});
+});
+
 
 router.get('/branches',toUserLogin,require('../controllers/BranchController').branches);
 router.get('/branch',toUserLogin,require('../controllers/BranchController').branch);
+router.get('/branch/:id',toUserLogin,require('../controllers/BranchController').branchEdit);
 router.post('/branch',toUserLogin,require('../controllers/BranchController').branchAdd);
 router.get('/branch/active/:id/:val',toUserLogin,require('../controllers/BranchController').branchActive);
 
@@ -84,6 +118,7 @@ router.get('/branch/active/:id/:val',toUserLogin,require('../controllers/BranchC
 router.get('/users',toUserLogin,require('../controllers/UserController').users);
 router.get('/user',toUserLogin,require('../controllers/UserController').user);
 router.post('/user',toUserLogin,require('../controllers/UserController').userAdd);
+router.get('/user/:id',toUserLogin,require('../controllers/UserController').userEdit);
 router.get('/users/active/:id/:val',toUserLogin,require('../controllers/UserController').userActive);
 
 router.get('/certificate-no',require('../controllers/CertificateController').generateCertificate);

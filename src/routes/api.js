@@ -49,4 +49,9 @@ router.get('/reset-info-session',(req,res)=>{
     res.json({err:0});
 })
 
+
+router.post('/login',require('../controllers/UserController').login);
+router.get('/config',(req,res)=>{
+	res.status(200).send({success:true,message:"Config feched",data:req.app.config});
+});
 module.exports = router;

@@ -15,6 +15,16 @@ class BranchController{
 		   });
 	}
 
+	async branchEdit(req,res){
+		let id = req.params.id;
+		var where = {where:{id:id}};
+		var user = await db.user.findOne(where);
+		
+		 let branches = await db.branch.findAll();
+  		res.render("user/new-user",{branches,user})
+
+	}
+
 	branches(req, res) {
 
     db.branch.findAll({order: [['createdAt', 'DESC']]})
